@@ -1,7 +1,36 @@
 package tictactoe;
+import java.util.Arrays;
 import  java.util.Scanner;
 
 public class tictactoe {
+
+    public static boolean RunChecks(int testNum, String str) {
+        boolean testResult = true;
+        System.out.println("Test Number: " + testNum + " : " + str);
+        testResult = true;
+    return testResult;
+    }
+
+    public static void StateChecks(char [][] board) {
+        String boardAgain = Arrays.deepToString(board);
+        //System.out.println(Arrays.deepToString(board));
+        //System.out.println(boardAgain);
+        //char symbol= boardAgain.charAt(5);
+        String strAgain = "";
+        for(int i = 2; i < 32; i++) {
+            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
+                strAgain += String.valueOf(boardAgain.charAt(i));
+            }
+        }
+        System.out.println(strAgain);
+        for( int i = 1; i <= 7; i++) {
+          boolean testResult = RunChecks( i, strAgain);
+        }
+    }
+
+    public static void BoardState(char [][] board) {
+        StateChecks(board);
+    }
 
     public static char CheckSymbol(String str, int symbolCount) {
         char symbol = str.charAt(symbolCount);
@@ -49,7 +78,7 @@ public class tictactoe {
             }
         System.out.println('|');
         }
-    	System.out.print("---------");
+    	System.out.println("---------");
     }
 
     public static void main(String[] args) {
@@ -58,6 +87,7 @@ public class tictactoe {
         userSymbolInputCount =  UserInput(board);
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
+            BoardState(board);
         }
     }
 }
