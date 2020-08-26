@@ -6,30 +6,65 @@ public class tictactoe {
 
     public static boolean RunChecks(int testNum, String str) {
         boolean testResult = true;
-        System.out.println("Test Number: " + testNum + " : " + str);
+        System.out.println("RunChecks Test Number: " + testNum + " string: " + str);
+        switch (testNum) {
+            case 1:
+                System.out.println("Checking: Game not finished ? ");
+                break;
+            case 2:
+                System.out.println("Checking: Game Draw (X or O");
+                break;
+            case 3:
+                System.out.println("Checking: Win X ");
+                break;
+            case 4:
+                System.out.println("Checking: Win O");
+                break;
+            case 5:
+                System.out.println("Checking: Impossible - 3 in a row ( X and O");
+                break;
+            case 6:
+                System.out.println("Checking: Impossible - diff O count >= 2");
+                break;
+            case 7:
+                System.out.println("Checking: Impossible - diff X count >= 2");
+                break;
+            default:
+                System.out.println("Something went wrong!");
+                break;
+        }
         testResult = true;
     return testResult;
     }
 
-    public static void StateChecks(char [][] board) {
+    public static boolean StateChecks(char [][] board) {
         String boardAgain = Arrays.deepToString(board);
         //System.out.println(Arrays.deepToString(board));
         //System.out.println(boardAgain);
         //char symbol= boardAgain.charAt(5);
+        boolean testResult = false;
         String strAgain = "";
         for(int i = 2; i < 32; i++) {
             if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
                 strAgain += String.valueOf(boardAgain.charAt(i));
             }
         }
-        System.out.println(strAgain);
+        //System.out.println(strAgain);
         for( int i = 1; i <= 7; i++) {
-          boolean testResult = RunChecks( i, strAgain);
+            System.out.println("StateChecks: " + i );
+            testResult = RunChecks( i, strAgain);
         }
+    return testResult;
     }
 
     public static void BoardState(char [][] board) {
-        StateChecks(board);
+        System.out.println("Entering 'BoarState'");
+        System.out.println("**************************************************************");
+        boolean allTestCompleted = StateChecks(board);
+        //System.out.println();
+        System.out.println("**************************************************************");
+        System.out.println("All Tests Completed: "+ allTestCompleted);
+        System.out.println("Exiting 'BoarState'");
     }
 
     public static char CheckSymbol(String str, int symbolCount) {
