@@ -6,10 +6,32 @@ public class tictactoe {
 
     public static int[] BoardCount(String board) {
         System.out.println("call BoardCount - String is: " + board);
-        int[] boardCount = {1,2,3};
+        int[] boardCount = {0, 0, 0};
+        int countX = 0;
+        int countO = 0;
+        int count_ = 0;
+        //char symbol = board.charAt(0);
+        for (int i = 0; i < board.length();  ++i) {
+            switch (board.charAt(i)) {
+                case 'X':
+                    ++countX;
+                    break;
+                case 'O':
+                    ++countO;
+                    break;
+                case '_':
+                    ++count_;
+                    break;
+                default:
+                    //symbol = ' ';
+                    break;
+            }
+        }
+        boardCount[0] = countX;
+        boardCount[1]= countO;
+        boardCount[2] = count_;
         return boardCount;
     }
-
 
     public static boolean RunChecks(int testNum, String str) {
         boolean testResult = true;
@@ -62,9 +84,12 @@ public class tictactoe {
                 strAgain += String.valueOf(boardAgain.charAt(i));
             }
         }
-        int[] boardCount = BoardCount(strAgain);  //boardCount
+        //boardCount - Get the count of each slot and print info on this***************************
+        int[] boardCount = BoardCount(strAgain);
         System.out.println("boardCount: " + Arrays.toString(boardCount));
         System.out.println("**************************************************************");
+        System.out.println();
+        // Go to StateChecks for each desired test on the Board
         for( int i = 1; i <= 7; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain);
@@ -76,7 +101,6 @@ public class tictactoe {
         System.out.println("Entering 'BoardState'");
         System.out.println("**************************************************************");
         boolean allTestCompleted = StateChecks(board);
-        //System.out.println();
         System.out.println("**************************************************************");
         System.out.println("All Tests Completed: "+ allTestCompleted);
         System.out.println("Exiting 'BoardState'");
