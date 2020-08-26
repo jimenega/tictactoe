@@ -4,6 +4,15 @@ import  java.util.Scanner;
 
 public class tictactoe {
 
+    public static boolean CheckEmptyCells(int[] boardCount) {
+        //System.out.println("Empty Cells ?");
+        boolean emptyCells = true;
+        if (boardCount[2] == 0) {
+            emptyCells = false;
+        }
+        return emptyCells;
+    }
+
     public static int[] BoardCount(String board) {
         System.out.println("call BoardCount - String is: " + board);
         int[] boardCount = {0, 0, 0};
@@ -23,20 +32,22 @@ public class tictactoe {
                     ++count_;
                     break;
                 default:
+                    System.out.println("?? location: BoardCount/switch/default");
                     //symbol = ' ';
                     break;
             }
         }
-        boardCount[0] = countX;
-        boardCount[1]= countO;
-        boardCount[2] = count_;
+        boardCount[0] = countX; // Array Index 0 is the X counter
+        boardCount[1] = countO;  // Array Index 1 is the O counter
+        boardCount[2] = count_; // Array Index _ is the _ counter
         return boardCount;
     }
 
-    public static boolean RunChecks(int testNum, String str) {
+    public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
         boolean testResult = true;
         //System.out.println();
         System.out.println("RunChecks: " + testNum + " string: " + str);
+        System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
                 System.out.println("Checking: Game not finished ? ");
@@ -67,7 +78,7 @@ public class tictactoe {
                 System.out.println();
                 break;
             default:
-                System.out.println("Something went wrong!");
+                System.out.println("location: RunCheck/case/default - Something went wrong!");
                 System.out.println();
                 break;
         }
@@ -76,23 +87,30 @@ public class tictactoe {
     }
 
     public static boolean StateChecks(char [][] board) {
-        String boardAgain = Arrays.deepToString(board);
         boolean testResult = false;
+
+        //* Convert Array board back to a String ****************************************
+        String boardAgain = Arrays.deepToString(board);
         String strAgain = "";
         for(int i = 2; i < 32; i++) {
             if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
                 strAgain += String.valueOf(boardAgain.charAt(i));
             }
         }
-        //boardCount - Get the count of each slot and print info on this***************************
+
+        //* boardCount - Get the count of each slot for X, O, _ ***************************
         int[] boardCount = BoardCount(strAgain);
-        System.out.println("boardCount: " + Arrays.toString(boardCount));
+
+        //* Check for empty cells *********************************************************
+        boolean emptyCells = CheckEmptyCells(boardCount);
+        System.out.println("boardCount: " + Arrays.toString(boardCount) + " emptyCells: " + emptyCells);
         System.out.println("**************************************************************");
         System.out.println();
-        // Go to StateChecks for each desired test on the Board
+
+        //* Go to StateChecks for each desired test on the Board
         for( int i = 1; i <= 7; i++) {
             System.out.println("StateChecks: " + i );
-            testResult = RunChecks( i, strAgain);
+            testResult = RunChecks( i, strAgain, boardCount, emptyCells);
         }
         return testResult;
     }
