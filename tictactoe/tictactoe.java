@@ -4,33 +4,49 @@ import  java.util.Scanner;
 
 public class tictactoe {
 
+    public static int[] BoardCount(String board) {
+        System.out.println("call BoardCount - String is: " + board);
+        int[] boardCount = {1,2,3};
+        return boardCount;
+    }
+
+
     public static boolean RunChecks(int testNum, String str) {
         boolean testResult = true;
-        System.out.println("RunChecks Test Number: " + testNum + " string: " + str);
+        //System.out.println();
+        System.out.println("RunChecks: " + testNum + " string: " + str);
         switch (testNum) {
             case 1:
                 System.out.println("Checking: Game not finished ? ");
+                System.out.println();
                 break;
             case 2:
-                System.out.println("Checking: Game Draw (X or O");
+                System.out.println("Checking: Game Draw (X or O)");
+                System.out.println();
                 break;
             case 3:
-                System.out.println("Checking: Win X ");
+                System.out.println("Checking: Win X");
+                System.out.println();
                 break;
             case 4:
                 System.out.println("Checking: Win O");
+                System.out.println();
                 break;
             case 5:
-                System.out.println("Checking: Impossible - 3 in a row ( X and O");
+                System.out.println("Checking: Impossible - 3 in a row ( X and O)");
+                System.out.println();
                 break;
             case 6:
                 System.out.println("Checking: Impossible - diff O count >= 2");
+                System.out.println();
                 break;
             case 7:
                 System.out.println("Checking: Impossible - diff X count >= 2");
+                System.out.println();
                 break;
             default:
                 System.out.println("Something went wrong!");
+                System.out.println();
                 break;
         }
         testResult = true;
@@ -39,9 +55,6 @@ public class tictactoe {
 
     public static boolean StateChecks(char [][] board) {
         String boardAgain = Arrays.deepToString(board);
-        //System.out.println(Arrays.deepToString(board));
-        //System.out.println(boardAgain);
-        //char symbol= boardAgain.charAt(5);
         boolean testResult = false;
         String strAgain = "";
         for(int i = 2; i < 32; i++) {
@@ -49,22 +62,24 @@ public class tictactoe {
                 strAgain += String.valueOf(boardAgain.charAt(i));
             }
         }
-        //System.out.println(strAgain);
+        int[] boardCount = BoardCount(strAgain);  //boardCount
+        System.out.println("boardCount: " + Arrays.toString(boardCount));
+        System.out.println("**************************************************************");
         for( int i = 1; i <= 7; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain);
         }
-    return testResult;
+        return testResult;
     }
 
     public static void BoardState(char [][] board) {
-        System.out.println("Entering 'BoarState'");
+        System.out.println("Entering 'BoardState'");
         System.out.println("**************************************************************");
         boolean allTestCompleted = StateChecks(board);
         //System.out.println();
         System.out.println("**************************************************************");
         System.out.println("All Tests Completed: "+ allTestCompleted);
-        System.out.println("Exiting 'BoarState'");
+        System.out.println("Exiting 'BoardState'");
     }
 
     public static char CheckSymbol(String str, int symbolCount) {
