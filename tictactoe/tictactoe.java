@@ -45,7 +45,6 @@ public class tictactoe {
 
     public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
         boolean testResult = true;
-        //System.out.println();
         System.out.println("RunChecks: " + testNum + " string: " + str);
         System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
@@ -71,6 +70,13 @@ public class tictactoe {
                 break;
             case 6:
                 System.out.println("Checking: Impossible - diff O count >= 2");
+                int diff = boardCount[0] - boardCount[1];
+                if (diff >= 2) {
+                    System.out.print("X count is greater or equal to O count: Impossible: ");
+                } else if (diff <= -2) {
+                    System.out.print("O count is greater or equal to X count: Impossible: ");
+                }
+                System.out.println("diff: " + diff);
                 System.out.println();
                 break;
             case 7:
