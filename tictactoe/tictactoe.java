@@ -46,6 +46,7 @@ public class tictactoe {
 
     public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
         boolean testResult = true;
+        int diff= boardCount[0] - boardCount[1];
         System.out.println("RunChecks: " + testNum + " string: " + str);
         System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
@@ -66,22 +67,23 @@ public class tictactoe {
                 System.out.println();
                 break;
             case 5:
-                System.out.println("Checking: Impossible - 3 in a row ( X and O)");
+                System.out.println("Checking: Impossible - 3 in a row ( either X, or either O)");
                 System.out.println();
                 break;
             case 6:
-                System.out.println("Checking: Impossible - diff O count >= 2");
-                int diff = boardCount[0] - boardCount[1];
+                System.out.println("Checking: Impossible X count >= 2");
                 if (diff >= 2) {
-                    System.out.print("X count is greater or equal to O count: Impossible: ");
-                } else if (diff <= -2) {
-                    System.out.print("O count is greater or equal to X count: Impossible: ");
+                    System.out.print("Impossible: X count is greater than O count (2 or more)  ");
+                    System.out.println("diff: " + diff);
                 }
-                System.out.println("diff: " + diff);
                 System.out.println();
                 break;
             case 7:
-                System.out.println("Checking: Impossible - diff X count >= 2");
+                System.out.println("Checking: Impossible O count <= -2");
+                if (diff <= -2) {
+                    System.out.print("Imposible: O count is greater than X count (2 or more)  ");
+                    System.out.println("diff: " + diff);
+                }
                 System.out.println();
                 break;
             default:
@@ -184,6 +186,7 @@ public class tictactoe {
         int userSymbolInputCount;
         char[][] board = new char[3][3];
         userSymbolInputCount =  UserInput(board);
+        System.out.println(Arrays.deepToString(board));
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
             BoardState(board);
