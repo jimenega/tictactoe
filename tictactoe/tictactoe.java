@@ -43,56 +43,84 @@ public class tictactoe {
         boardCount[2] = count_; // Array Index _ is the _ counter
         return boardCount;
     }
+    public static boolean Check7(int diff) {
+        boolean checkResult = false;
+        System.out.println("Impossible 3: O count <= -2");
+        if (diff <= -2) {
+            System.out.print("Imposible: O count is greater than X count (2 or more)  ");
+            System.out.println("diff: " + diff);
+            checkResult = true;
+        }
+        //System.out.println();
+        return checkResult;
+    }
+
+    public static boolean Check6(int diff) {
+        boolean checkResult = false;
+        System.out.println("Impossible 2: X count >= 2");
+        if (diff >= 2) {
+            System.out.print("Impossible: X count is greater than O count (2 or more)  ");
+            System.out.println("diff: " + diff);
+            checkResult = true;
+        }
+        //System.out.println();
+        return checkResult;
+    }
+
+    public static boolean Check5(int diff) {
+        boolean checkResult = false;
+        System.out.println("Impossible 1: 3 X's in a row & 3 O's in a row");
+        return checkResult;
+    }
+
+    public static boolean Check4(int diff) {
+        boolean checkResult = false;
+        System.out.println("O Wins");
+        return checkResult;
+    }
+
+    public static boolean Check3(int diff) {
+        boolean checkResult = false;
+        System.out.println("X wins");
+        return checkResult;
+    }
+
+    public static boolean Check2(int diff) {
+        boolean checkResult = false;
+        System.out.println("Draw");
+        return checkResult;
+    }
+
+    public static boolean Check1(int diff, String str) {
+        boolean checkResult = false;
+        System.out.println(str);
+        System.out.println("Game not finished");
+        return checkResult;
+    }
 
     public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
-        boolean testResult = true;
         int diff= boardCount[0] - boardCount[1];
         System.out.println("RunChecks: " + testNum + " string: " + str);
         System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
-                System.out.println("Checking: Game not finished ? ");
-                System.out.println();
-                break;
+                return Check1(diff, str);
             case 2:
-                System.out.println("Checking: Game Draw (X or O)");
-                System.out.println();
-                break;
+                return Check2(diff);
             case 3:
-                System.out.println("Checking: Win X");
-                System.out.println();
-                break;
+                return Check3(diff);
             case 4:
-                System.out.println("Checking: Win O");
-                System.out.println();
-                break;
+                return Check4(diff);
             case 5:
-                System.out.println("Checking: Impossible - 3 in a row ( either X, or either O)");
-                System.out.println();
-                break;
+                return Check5(diff);
             case 6:
-                System.out.println("Checking: Impossible X count >= 2");
-                if (diff >= 2) {
-                    System.out.print("Impossible: X count is greater than O count (2 or more)  ");
-                    System.out.println("diff: " + diff);
-                }
-                System.out.println();
-                break;
+                return Check6(diff);
             case 7:
-                System.out.println("Checking: Impossible O count <= -2");
-                if (diff <= -2) {
-                    System.out.print("Imposible: O count is greater than X count (2 or more)  ");
-                    System.out.println("diff: " + diff);
-                }
-                System.out.println();
-                break;
+                return Check7(diff);
             default:
-                System.out.println("location: RunCheck/case/default - Something went wrong!");
-                System.out.println();
-                break;
+                System.out.println("RunCheck: switch/case default ?");
+                return false;
         }
-        testResult = true;
-    return testResult;
     }
 
     public static boolean StateChecks(char [][] board) {
@@ -120,6 +148,8 @@ public class tictactoe {
         for( int i = 1; i <= 7; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells);
+            System.out.println("testResult: " + testResult);
+            System.out.println();
         }
         return testResult;
     }
