@@ -88,28 +88,30 @@ public class tictactoe {
     public static boolean Check2(int diff) {
         boolean checkResult = false;
         System.out.println("Draw");
+        //matrixTranspose(str, 3);
         return checkResult;
     }
 
     public static boolean Check1(int diff, String str) {
         boolean checkResult = false;
         String s1, s2, s3, ss1, ss2, ss3;
-        String x3 = "XXX";
-        //System.out.println(str);
+        String X3 = "XXX";
+        String O3 = "OOO";
         System.out.println("Game not finished");
-        //matrixTranspose(str, 3);
         s1 = rotate(s2 = rotate(s3 = rotate(str, 3), 3),3);
         System.out.println(s1 + " " + s2 + " " + s3);
-        System.out.println(s1.substring(0,3));
-        System.out.println(s2.substring(0,3));
-        System.out.println(s3.substring(0,3));
-        ss1 = s1.substring(0, 3);
-        System.out.println(ss1);
         s1 = s1.substring(0, 3);
+        s2 = s2.substring(0, 3);
+        s3 = s3.substring(0, 3);
         System.out.println("s1 cutdown: " + s1);
-        System.out.println(x3.equals(s1));
-        System.out.println(x3.equals(s2));
-        System.out.println(x3.equals(s3));
+        System.out.println("s2 cutdown: " + s2);
+        System.out.println("s3 cutdown: " + s3);
+        System.out.println("s1 X equal: " + X3.equals(s1));
+        System.out.println("s2 X equal: " + X3.equals(s2));
+        System.out.println("s3 X equal: " + X3.equals(s3));
+        System.out.println("s1 O equal: " + O3.equals(s1));
+        System.out.println("s2 O equal: " + O3.equals(s2));
+        System.out.println("s3 O equal: " + O3.equals(s3));
         return checkResult;
     }
 
@@ -145,8 +147,8 @@ public class tictactoe {
 
     public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
         int diff= boardCount[0] - boardCount[1];
-        System.out.println("RunChecks: " + testNum + " string: " + str);
-        System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
+        //System.out.println("RunChecks: " + testNum + " string: " + str);
+        //System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
                 return Check1(diff, str);
@@ -190,7 +192,7 @@ public class tictactoe {
         System.out.println();
 
         //* Go to StateChecks for each desired test on the Board
-        for( int i = 1; i <= 7; i++) {
+        for( int i = 2; i <= 2; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells);
             System.out.println("testResult: " + testResult);
