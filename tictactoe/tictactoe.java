@@ -93,9 +93,54 @@ public class tictactoe {
 
     public static boolean Check1(int diff, String str) {
         boolean checkResult = false;
-        System.out.println(str);
+        String s1, s2, s3, ss1, ss2, ss3;
+        String x3 = "XXX";
+        //System.out.println(str);
         System.out.println("Game not finished");
+        //matrixTranspose(str, 3);
+        s1 = rotate(s2 = rotate(s3 = rotate(str, 3), 3),3);
+        System.out.println(s1 + " " + s2 + " " + s3);
+        System.out.println(s1.substring(0,3));
+        System.out.println(s2.substring(0,3));
+        System.out.println(s3.substring(0,3));
+        ss1 = s1.substring(0, 3);
+        System.out.println(ss1);
+        s1 = s1.substring(0, 3);
+        System.out.println("s1 cutdown: " + s1);
+        System.out.println(x3.equals(s1));
+        System.out.println(x3.equals(s2));
+        System.out.println(x3.equals(s3));
         return checkResult;
+    }
+
+    public static void matrixTranspose(String[][] inArray, int nn) {
+        for (int i = 0; i < nn; i++) {
+            for (int j = i + 1; j < nn; j++) {
+                String temp = inArray[i][j];
+                inArray[i][j] = inArray[j][i];
+                inArray[j][i] = temp;
+            }
+        }
+    }
+
+    public static String rotate(String str, int numRotation) {
+        //Scanner scanner = new Scanner(System.in);
+        //String str = scanner.nextLine();
+        //int numRotation;
+        //StringBuilder strNew = new StringBuilder();
+        String strNew = "";
+        String[] ary = str.split("");
+        String[] newAry = new String[ary.length];
+        for(int x = 0; x <= ary.length-1; x++){
+            newAry[(x + numRotation) % ary.length ] = ary[x];
+        }
+        for (String f : newAry) {
+            //System.out.print(f + "");
+            strNew += f;
+        }
+        //System.out.println();
+        //System.out.println("strNew: " + strNew);
+        return strNew;
     }
 
     public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
