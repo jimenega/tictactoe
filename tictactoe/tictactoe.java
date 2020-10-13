@@ -85,10 +85,10 @@ public class tictactoe {
         return checkResult;
     }
 
-    public static boolean Check2(int diff) {
+    public static boolean Check2(char[][] board) {
         boolean checkResult = false;
         System.out.println("Draw");
-        //matrixTranspose(str, 3);
+        matrixTranspose(board);
         return checkResult;
     }
 
@@ -115,14 +115,26 @@ public class tictactoe {
         return checkResult;
     }
 
-    public static void matrixTranspose(String[][] inArray, int nn) {
-        for (int i = 0; i < nn; i++) {
-            for (int j = i + 1; j < nn; j++) {
-                String temp = inArray[i][j];
+    public static void matrixTranspose(char[][] inArray) {
+        // Transpose inArray
+        for (int i = 0; i < 3; i++) {
+            for (int j = i + 1; j < 3; j++) {
+                char temp = inArray[i][j];
                 inArray[i][j] = inArray[j][i];
                 inArray[j][i] = temp;
             }
         }
+        System.out.println(Arrays.deepToString(inArray));
+
+        // Convert transposed inArray to a String
+        String boardAgain = Arrays.deepToString(inArray);
+        String strAgain = "";
+        for(int i = 2; i < 32; i++) {
+            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
+                strAgain += String.valueOf(boardAgain.charAt(i));
+            }
+        }
+        System.out.println(strAgain);
     }
 
     public static String rotate(String str, int numRotation) {
@@ -145,7 +157,7 @@ public class tictactoe {
         return strNew;
     }
 
-    public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells) {
+    public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells, char[][] board) {
         int diff= boardCount[0] - boardCount[1];
         //System.out.println("RunChecks: " + testNum + " string: " + str);
         //System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
@@ -153,7 +165,7 @@ public class tictactoe {
             case 1:
                 return Check1(diff, str);
             case 2:
-                return Check2(diff);
+                return Check2(board);
             case 3:
                 return Check3(diff);
             case 4:
@@ -194,7 +206,7 @@ public class tictactoe {
         //* Go to StateChecks for each desired test on the Board
         for( int i = 2; i <= 2; i++) {
             System.out.println("StateChecks: " + i );
-            testResult = RunChecks( i, strAgain, boardCount, emptyCells);
+            testResult = RunChecks( i, strAgain, boardCount, emptyCells, board);
             System.out.println("testResult: " + testResult);
             System.out.println();
         }
