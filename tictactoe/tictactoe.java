@@ -92,9 +92,9 @@ public class tictactoe {
         return checkResult;
     }
 
-    public static boolean Check1(int diff, String str) {
+    public static boolean Check1(int diff, String str, char[][] board) {
         boolean checkResult = false;
-        String s1, s2, s3, ss1, ss2, ss3;
+        String s1, s2, s3;
         String X3 = "XXX";
         String O3 = "OOO";
         System.out.println("Game not finished");
@@ -112,10 +112,14 @@ public class tictactoe {
         System.out.println("s1 O equal: " + O3.equals(s1));
         System.out.println("s2 O equal: " + O3.equals(s2));
         System.out.println("s3 O equal: " + O3.equals(s3));
+        // Transpose str and recheck colums
+        System.out.println("run matrixTranspose");
+        String strTrans =  matrixTranspose(board);
+        System.out.println("strTrans: " + strTrans);
         return checkResult;
     }
 
-    public static void matrixTranspose(char[][] inArray) {
+    public static String matrixTranspose(char[][] inArray) {
         // Transpose inArray
         for (int i = 0; i < 3; i++) {
             for (int j = i + 1; j < 3; j++) {
@@ -134,7 +138,8 @@ public class tictactoe {
                 strAgain += String.valueOf(boardAgain.charAt(i));
             }
         }
-        System.out.println(strAgain);
+        //System.out.println(strAgain);
+        return strAgain;
     }
 
     public static String rotate(String str, int numRotation) {
@@ -163,7 +168,7 @@ public class tictactoe {
         //System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
-                return Check1(diff, str);
+                return Check1(diff, str, board);
             case 2:
                 return Check2(board);
             case 3:
@@ -204,7 +209,7 @@ public class tictactoe {
         System.out.println();
 
         //* Go to StateChecks for each desired test on the Board
-        for( int i = 2; i <= 2; i++) {
+        for( int i = 1; i <= 1; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells, board);
             System.out.println("testResult: " + testResult);
