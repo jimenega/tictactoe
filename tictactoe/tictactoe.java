@@ -94,28 +94,44 @@ public class tictactoe {
 
     public static boolean Check1(int diff, String str, char[][] board) {
         boolean checkResult = false;
-        String s1, s2, s3;
+        String r1, r2, r3;
+        String c1, c2, c3;
         String X3 = "XXX";
         String O3 = "OOO";
         System.out.println("Game not finished");
-        s1 = rotate(s2 = rotate(s3 = rotate(str, 3), 3),3);
-        System.out.println(s1 + " " + s2 + " " + s3);
-        s1 = s1.substring(0, 3);
-        s2 = s2.substring(0, 3);
-        s3 = s3.substring(0, 3);
-        System.out.println("s1 cutdown: " + s1);
-        System.out.println("s2 cutdown: " + s2);
-        System.out.println("s3 cutdown: " + s3);
-        System.out.println("s1 X equal: " + X3.equals(s1));
-        System.out.println("s2 X equal: " + X3.equals(s2));
-        System.out.println("s3 X equal: " + X3.equals(s3));
-        System.out.println("s1 O equal: " + O3.equals(s1));
-        System.out.println("s2 O equal: " + O3.equals(s2));
-        System.out.println("s3 O equal: " + O3.equals(s3));
+        r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
+        System.out.println(r1 + "  " + r2 + "  " + r3);
+        r1 = r1.substring(0, 3);
+        r2 = r2.substring(0, 3);
+        r3 = r3.substring(0, 3);
+        System.out.println("r1 cutdown: " + r1);
+        System.out.println("r2 cutdown: " + r2);
+        System.out.println("r3 cutdown: " + r3);
+        System.out.println("r1 X equal: " + X3.equals(r1));
+        System.out.println("r2 X equal: " + X3.equals(r2));
+        System.out.println("r3 X equal: " + X3.equals(r3));
+        System.out.println("r1 O equal: " + O3.equals(r1));
+        System.out.println("r2 O equal: " + O3.equals(r2));
+        System.out.println("r3 O equal: " + O3.equals(r3));
         // Transpose str and recheck colums
         System.out.println("run matrixTranspose");
         String strTrans =  matrixTranspose(board);
         System.out.println("strTrans: " + strTrans);
+        c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
+        System.out.println(c1 + "  " + c2 + "  " + c3);
+        c1 = c1.substring(0, 3);
+        c2 = c2.substring(0, 3);
+        c3 = c3.substring(0, 3);
+        System.out.println("c1 cutdown: " + c1);
+        System.out.println("c2 cutdown: " + c2);
+        System.out.println("c3 cutdown: " + c3);
+        System.out.println("c1 X equal: " + X3.equals(c1));
+        System.out.println("c2 X equal: " + X3.equals(c2));
+        System.out.println("c3 X equal: " + X3.equals(c3));
+        System.out.println("c1 O equal: " + O3.equals(c1));
+        System.out.println("c2 O equal: " + O3.equals(c2));
+        System.out.println("c3 O equal: " + O3.equals(c3));
+
         return checkResult;
     }
 
@@ -212,7 +228,7 @@ public class tictactoe {
         for( int i = 1; i <= 1; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells, board);
-            System.out.println("testResult: " + testResult);
+            //System.out.println("testResult: " + testResult);
             System.out.println();
         }
         return testResult;
