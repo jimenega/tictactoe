@@ -96,6 +96,7 @@ public class tictactoe {
         boolean checkResult = false;
         String r1, r2, r3;
         String c1, c2, c3;
+        String df, db;
         String X3 = "XXX";
         String O3 = "OOO";
         System.out.println("Game not finished");
@@ -131,6 +132,14 @@ public class tictactoe {
         System.out.println("c1 O equal: " + O3.equals(c1));
         System.out.println("c2 O equal: " + O3.equals(c2));
         System.out.println("c3 O equal: " + O3.equals(c3));
+        // Start diagonal checks
+        df = String.valueOf(str.charAt(2)) + str.charAt(4) + str.charAt(6);
+        db = String.valueOf(str.charAt(0)) + str.charAt(4) + str.charAt(8);
+        System.out.println(df + "  " + db);
+        System.out.println("df X equal: " + X3.equals(df));
+        System.out.println("db X equal: " + X3.equals(db));
+        System.out.println("df O equal: " + O3.equals(df));
+        System.out.println("db O equal: " + O3.equals(db));
 
         return checkResult;
     }
