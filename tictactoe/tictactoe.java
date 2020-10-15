@@ -44,36 +44,6 @@ public class tictactoe {
         return boardCount;
     }
 
-    public static int[] WinCount(String board) {
-        System.out.println("call BoardCount - String is: " + board);
-        int[] boardCount = {0, 0, 0};
-        int countX = 0;
-        int countO = 0;
-        int count_ = 0;
-        //char symbol = board.charAt(0);
-        for (int i = 0; i < board.length();  ++i) {
-            switch (board.charAt(i)) {
-                case 'X':
-                    ++countX;
-                    break;
-                case 'O':
-                    ++countO;
-                    break;
-                case '_':
-                    ++count_;
-                    break;
-                default:
-                    System.out.println("?? location: BoardCount/switch/default");
-                    //symbol = ' ';
-                    break;
-            }
-        }
-        boardCount[0] = countX; // Array Index 0 is the X counter
-        boardCount[1] = countO;  // Array Index 1 is the O counter
-        boardCount[2] = count_; // Array Index _ is the _ counter
-        return boardCount;
-    }
-
     public static boolean Check7(int diff) {
         boolean checkResult = false;
         System.out.println("Impossible 3: O count <= -2");
@@ -173,8 +143,17 @@ public class tictactoe {
         System.out.println("df O equal: " + O3.equals(df));
         System.out.println("db O equal: " + O3.equals(db));
         String[] winArray = new String[] {r1, r2, r3, c1, c2, c3, df, db};
+        int[] winCountArray = new int[] {0, 0};
         System.out.println(Arrays.toString(winArray));
-
+        System.out.println("r1 X equal: " + X3.equals(winArray[0]));
+        for( int i = 0; i <= 7; i++) {
+            if (X3.equals(winArray[i])) {
+                winCountArray[0]++;
+            } else if (O3.equals(winArray[i]) ) {
+                winCountArray[1]++;
+            }
+        }
+        System.out.println(Arrays.toString(winCountArray));
         return checkResult;
     }
 
