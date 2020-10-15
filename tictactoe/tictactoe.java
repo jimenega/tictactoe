@@ -267,7 +267,7 @@ public class tictactoe {
     return symbol;
     }
 
-    public static int UserInput(char [][] board) {
+    public static int UserInput(char[][] board) {
         int userInputCount= 0;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter cells: ");
@@ -287,7 +287,7 @@ public class tictactoe {
     return userInputCount;
     }
 
-    public static void StatusDisplay(char [][] board) {
+    public static void StatusDisplay(char[][] board) {
         char CurrentField;
         System.out.println("---------");
         for (int i = 0; i < 3; i++) {
