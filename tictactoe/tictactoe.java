@@ -15,7 +15,7 @@ public class tictactoe {
     }
 
     public static int[] BoardCount(String board) {
-        System.out.println("call BoardCount - String is: " + board);
+        //System.out.println("call BoardCount - String is: " + board);
         int[] boardCount = {0, 0, 0};
         int countX = 0;
         int countO = 0;
@@ -93,59 +93,65 @@ public class tictactoe {
         return checkResult;
     }
 
-    public static boolean Check1(int diff, String str, char[][] board) {
+    public static boolean Check1(char[][] board) {
+        boolean checkResult = false;
+        System.out.println("Game not finished");
+        return checkResult;
+    }
+
+    public static int[] winChecks(int[] boardCount, String str, char[][] board) {
+        int diff= boardCount[0] - boardCount[1];
         boolean checkResult = false;
         String r1, r2, r3;
         String c1, c2, c3;
         String df, db;
         String X3 = "XXX";
         String O3 = "OOO";
-        System.out.println("Game not finished");
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         //System.out.println(r1 + "  " + r2 + "  " + r3);
         r1 = r1.substring(0, 3);
         r2 = r2.substring(0, 3);
         r3 = r3.substring(0, 3);
-        System.out.println("r1,r2,r3 cut: " + r1 + " " + r2 + " " + r3);
+        //System.out.println("r1,r2,r3 cut: " + r1 + " " + r2 + " " + r3);
         //System.out.println("r2 cutdown: " + r2);
         //System.out.println("r3 cutdown: " + r3);
-        System.out.println("r1 X equal: " + X3.equals(r1));
-        System.out.println("r2 X equal: " + X3.equals(r2));
-        System.out.println("r3 X equal: " + X3.equals(r3));
-        System.out.println("r1 O equal: " + O3.equals(r1));
-        System.out.println("r2 O equal: " + O3.equals(r2));
-        System.out.println("r3 O equal: " + O3.equals(r3));
+        //System.out.println("r1 X equal: " + X3.equals(r1));
+        //System.out.println("r2 X equal: " + X3.equals(r2));
+        //System.out.println("r3 X equal: " + X3.equals(r3));
+        //System.out.println("r1 O equal: " + O3.equals(r1));
+        //System.out.println("r2 O equal: " + O3.equals(r2));
+        //System.out.println("r3 O equal: " + O3.equals(r3));
         // Transpose str and recheck colums
         //System.out.println("run matrixTranspose");
         String strTrans =  matrixTranspose(board);
         //System.out.println("strTrans: " + strTrans);
         c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
-        System.out.println(c1 + "  " + c2 + "  " + c3);
+        //System.out.println(c1 + "  " + c2 + "  " + c3);
         c1 = c1.substring(0, 3);
         c2 = c2.substring(0, 3);
         c3 = c3.substring(0, 3);
         //System.out.println("c1 cutdown: " + c1);
         //System.out.println("c2 cutdown: " + c2);
         //System.out.println("c3 cutdown: " + c3);
-        System.out.println("c1,c2,c3 cut: " + c1 + " " + c2 + " " + c3);
-        System.out.println("c1 X equal: " + X3.equals(c1));
-        System.out.println("c2 X equal: " + X3.equals(c2));
-        System.out.println("c3 X equal: " + X3.equals(c3));
-        System.out.println("c1 O equal: " + O3.equals(c1));
-        System.out.println("c2 O equal: " + O3.equals(c2));
-        System.out.println("c3 O equal: " + O3.equals(c3));
+        //System.out.println("c1,c2,c3 cut: " + c1 + " " + c2 + " " + c3);
+        //System.out.println("c1 X equal: " + X3.equals(c1));
+        //System.out.println("c2 X equal: " + X3.equals(c2));
+        //System.out.println("c3 X equal: " + X3.equals(c3));
+        //System.out.println("c1 O equal: " + O3.equals(c1));
+        //System.out.println("c2 O equal: " + O3.equals(c2));
+        //System.out.println("c3 O equal: " + O3.equals(c3));
         // Start diagonal checks
         df = String.valueOf(str.charAt(2)) + str.charAt(4) + str.charAt(6);
         db = String.valueOf(str.charAt(0)) + str.charAt(4) + str.charAt(8);
         //System.out.println(df + "  " + db);
-        System.out.println("df X equal: " + X3.equals(df));
-        System.out.println("db X equal: " + X3.equals(db));
-        System.out.println("df O equal: " + O3.equals(df));
-        System.out.println("db O equal: " + O3.equals(db));
+        //System.out.println("df X equal: " + X3.equals(df));
+        //System.out.println("db X equal: " + X3.equals(db));
+        //System.out.println("df O equal: " + O3.equals(df));
+        //System.out.println("db O equal: " + O3.equals(db));
         String[] winArray = new String[] {r1, r2, r3, c1, c2, c3, df, db};
         int[] winCountArray = new int[] {0, 0};
-        System.out.println(Arrays.toString(winArray));
-        System.out.println("r1 X equal: " + X3.equals(winArray[0]));
+        //System.out.println(Arrays.toString(winArray));
+        //System.out.println("r1 X equal: " + X3.equals(winArray[0]));
         for( int i = 0; i <= 7; i++) {
             if (X3.equals(winArray[i])) {
                 winCountArray[0]++;
@@ -153,8 +159,8 @@ public class tictactoe {
                 winCountArray[1]++;
             }
         }
-        System.out.println(Arrays.toString(winCountArray));
-        return checkResult;
+        //System.out.println(Arrays.toString(winCountArray));
+        return winCountArray;
     }
 
     public static String matrixTranspose(char[][] inArray) {
@@ -206,7 +212,9 @@ public class tictactoe {
         //System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
-                return Check1(diff, str, board);
+                //return Check1(boardCount, str, board);
+                //System.out.println("running RunChecks1 - empty");
+                return false;
             case 2:
                 return Check2(board);
             case 3:
@@ -228,7 +236,7 @@ public class tictactoe {
     public static boolean StateChecks(char [][] board) {
         boolean testResult = false;
 
-        //* Convert Array board back to a String ****************************************
+        // Convert Array board back to a String
         String boardAgain = Arrays.deepToString(board);
         String strAgain = "";
         for(int i = 2; i < 32; i++) {
@@ -237,17 +245,26 @@ public class tictactoe {
             }
         }
 
-        //* boardCount - Get the count of each slot for X, O, _ ***************************
+        // boardCount - Get the count of each slot for X, O, _
         int[] boardCount = BoardCount(strAgain);
 
-        //* Check for empty cells *********************************************************
+        // winChecks - check for X or O winner
+        int[] winCountArray = winChecks(boardCount, strAgain, board);
+
+        //* Check for empty cells
         boolean emptyCells = CheckEmptyCells(boardCount);
-        System.out.println("boardCount: " + Arrays.toString(boardCount) + " emptyCells: " + emptyCells);
+
+        // Report vital game analysis data
+        System.out.println("*************************************************************");
+        System.out.println("boardCount: "   + Arrays.toString(boardCount)
+                + "  winChecks: " + Arrays.toString(winCountArray)
+                + "  emptyCells: " + emptyCells);
+
         System.out.println("**************************************************************");
         System.out.println();
 
-        //* Go to StateChecks for each desired test on the Board
-        for( int i = 1; i <= 1; i++) {
+        // Go to StateChecks for each desired test on the Board
+        for( int i = 1; i <= 0; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells, board);
             //System.out.println("testResult: " + testResult);
@@ -258,9 +275,9 @@ public class tictactoe {
 
     public static void BoardState(char [][] board) {
         System.out.println("Entering 'BoardState'");
-        System.out.println("**************************************************************");
+        //System.out.println("**************************************************************");
         boolean allTestCompleted = StateChecks(board);
-        System.out.println("**************************************************************");
+        //System.out.println("**************************************************************");
         System.out.println("All Tests Completed: "+ allTestCompleted);
         System.out.println("Exiting 'BoardState'");
     }
