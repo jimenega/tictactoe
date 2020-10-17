@@ -93,9 +93,18 @@ public class tictactoe {
         return checkResult;
     }
 
-    public static boolean Check1(char[][] board) {
+    public static boolean Check1(int[] boardCount, int[] winCount) {
         boolean checkResult = false;
-        System.out.println("Game not finished");
+        int diff = boardCount[0] - boardCount[1];
+        System.out.println("Check1: Game not finished");
+        System.out.println("boardCount: "   + Arrays.toString(boardCount)
+                + "  winChecks: " + Arrays.toString(winCount)
+                + "  diff: " + diff);
+        boolean emptyCells = CheckEmptyCells(boardCount);
+        if (winCount[0] == 0 && winCount[1] == 0 && emptyCells) {
+            checkResult = true;
+            System.out.println("Game not finished");
+        }
         return checkResult;
     }
 
@@ -206,15 +215,15 @@ public class tictactoe {
         return strNew;
     }
 
-    public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells, char[][] board) {
+    public static boolean RunChecks(int testNum, String str, int[] boardCount, boolean emptyCells, char[][] board, int[] winCountArray) {
         int diff= boardCount[0] - boardCount[1];
         //System.out.println("RunChecks: " + testNum + " string: " + str);
         //System.out.println("boardCount: " + Arrays.toString(boardCount) + "  emptyCells: " + emptyCells);
         switch (testNum) {
             case 1:
-                //return Check1(boardCount, str, board);
+                return Check1(boardCount, winCountArray);
                 //System.out.println("running RunChecks1 - empty");
-                return false;
+                //return false;
             case 2:
                 return Check2(board);
             case 3:
@@ -259,14 +268,13 @@ public class tictactoe {
         System.out.println("boardCount: "   + Arrays.toString(boardCount)
                 + "  winChecks: " + Arrays.toString(winCountArray)
                 + "  emptyCells: " + emptyCells);
-
         System.out.println("**************************************************************");
-        System.out.println();
+        //System.out.println();
 
         // Go to StateChecks for each desired test on the Board
-        for( int i = 1; i <= 0; i++) {
+        for( int i = 1; i <= 1; i++) {
             System.out.println("StateChecks: " + i );
-            testResult = RunChecks( i, strAgain, boardCount, emptyCells, board);
+            testResult = RunChecks( i, strAgain, boardCount, emptyCells, board, winCountArray);
             //System.out.println("testResult: " + testResult);
             System.out.println();
         }
