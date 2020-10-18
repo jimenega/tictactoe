@@ -1,0 +1,11 @@
+		
+
+		char[][] tm1 = new char[][] {{'X','X','X'},{'O','O','_'},{'_','O','_'}};  //DEBUG CODE
+        char[][] tm2 = new char[][] {{'X','O','X'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE
+        char[][] tm3 = new char[][] {{'X','O','O'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE
+        char[][] tm4 = new char[][] {{'X','O','X'},{'O','O','X'},{'X','X','O'}};  //DEBUG CODE
+        char[][] tm5 = new char[][] {{'X','O','_'},{'O','O','X'},{'_','X','_'}};  //DEBUG CODE
+        char[][] tm6 = new char[][] {{'X','O','_'},{'X','O','_'},{'X','O','X'}};  //DEBUG CODE
+        char[][] tm7 = new char[][] {{'_','O','_'},{'X','_','_'},{'X','_','X'}};  //DEBUG CODE
+        char[][] tm8 = new char[][] {{'_','O','O'},{'O','O','_'},{'X','_','X'}};  //DEBUG CODE
+        char[][] tm9 = new char[][] {{'X','X','X'},{'O','O','O'},{'_','_','_'}};  //DEBUG CODE
