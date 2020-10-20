@@ -73,14 +73,15 @@ public class tictactoe {
     }
 
     public static boolean Check6(int[] boardCount, int[] winCount) {
+        // Impossible 2 - t6/ex7
         boolean checkResult = false;
         int diff = boardCount[0] - boardCount[1];
         System.out.println("Check6");
         System.out.println("boardCount: "   + Arrays.toString(boardCount)
                 + "  winChecks: " + Arrays.toString(winCount)
                 + "  diff: " + diff);
-        if (diff >= 2) {
-            System.out.print("Impossible: X count is greater than O count (2 or more)  ");
+        if (diff >= 2 || diff <= -2) {
+            System.out.print("Impossible 2: (X count > O count) OR (O count > X count)");
             System.out.println("diff: " + diff);
             checkResult = true;
         }
@@ -89,6 +90,7 @@ public class tictactoe {
     }
 
     public static boolean Check5(int[] boardCount, int[] winCount) {
+        // Impossible 1 - t5/ex6
         boolean checkResult = false;
         int diff = boardCount[0] - boardCount[1];
         System.out.println("Check5");
@@ -96,40 +98,70 @@ public class tictactoe {
                 + "  winChecks: " + Arrays.toString(winCount)
                 + "  diff: " + diff);
         boolean emptyCells = CheckEmptyCells(boardCount);
-        if (winCount[0] >= 1 && winCount[1] >= 1 && emptyCells) {
+        if (winCount[0] >= 1 && winCount[1] >= 1) {
             checkResult = true;
-            System.out.println("Impossible 1: 3 X's in a row & 3 O's in a row");
+            System.out.println("Impossible 1: 3'X' in a row & 3'O' in a row");
         }
 
         return checkResult;
     }
 
-    public static boolean Check4(int diff) {
+    public static boolean Check4(int[] boardCount, int[] winCount) {
+        // O Wins - t2/ex4
         boolean checkResult = false;
-        System.out.println("O Wins");
+        int diff = boardCount[0] - boardCount[1];
+        System.out.println("Check4 - O Wins");
+        System.out.println("boardCount: "   + Arrays.toString(boardCount)
+                + "  winChecks: " + Arrays.toString(winCount)
+                + "  diff X/O: " + diff);
+        boolean emptyCells = CheckEmptyCells(boardCount);
+        if (winCount[0] == 0 && winCount[1] == 1) {
+            checkResult = true;
+            System.out.println("O Wins");
+        }
         return checkResult;
     }
 
-    public static boolean Check3(int diff) {
+    public static boolean Check3(int[] boardCount, int[] winCount) {
+        // X Wins - t2/ex4
         boolean checkResult = false;
-        System.out.println("X wins");
+        int diff = boardCount[0] - boardCount[1];
+        System.out.println("Check3 - X Wins");
+        System.out.println("boardCount: "   + Arrays.toString(boardCount)
+                + "  winChecks: " + Arrays.toString(winCount)
+                + "  diff X/O: " + diff);
+        boolean emptyCells = CheckEmptyCells(boardCount);
+        if (winCount[0] == 1 && winCount[1] == 0) {
+            checkResult = true;
+            System.out.println("X Wins");
+        }
         return checkResult;
     }
 
-    public static boolean Check2(char[][] board) {
+    public static boolean Check2(int[] boardCount, int[] winCount) {
+        // Draw - t2/ex4
         boolean checkResult = false;
-        System.out.println("Draw");
-        matrixTranspose(board);
+        int diff = boardCount[0] - boardCount[1];
+        System.out.println("Check2 - Draw");
+        System.out.println("boardCount: "   + Arrays.toString(boardCount)
+                + "  winChecks: " + Arrays.toString(winCount)
+                + "  diff X/O: " + diff);
+        boolean emptyCells = CheckEmptyCells(boardCount);
+        if (winCount[0] == 0 && winCount[1] == 0 && !emptyCells) {
+            checkResult = true;
+            System.out.println("Draw");
+        }
         return checkResult;
     }
 
     public static boolean Check1(int[] boardCount, int[] winCount) {
+        // Game not finished - t1/ex5
         boolean checkResult = false;
         int diff = boardCount[0] - boardCount[1];
         System.out.println("Check1");
         System.out.println("boardCount: "   + Arrays.toString(boardCount)
                 + "  winChecks: " + Arrays.toString(winCount)
-                + "  diff: " + diff);
+                + "  diff X/O: " + diff);
         boolean emptyCells = CheckEmptyCells(boardCount);
         if (winCount[0] == 0 && winCount[1] == 0 && emptyCells) {
             checkResult = true;
@@ -255,17 +287,15 @@ public class tictactoe {
                 //System.out.println("running RunChecks1 - empty");
                 //return false;
             case 2:
-                return Check2(board);
+                return Check2(boardCount, winCountArray);
             case 3:
-                return Check3(diff);
+                return Check3(boardCount, winCountArray);
             case 4:
-                return Check4(diff);
+                return Check4(boardCount, winCountArray);
             case 5:
                 return Check5(boardCount, winCountArray);
             case 6:
                 return Check6(boardCount, winCountArray);
-            case 7:
-                return Check7(boardCount, winCountArray);
             default:
                 System.out.println("RunCheck: switch/case default ?");
                 return false;
@@ -302,7 +332,7 @@ public class tictactoe {
         //System.out.println();
 
         // Go to StateChecks for each desired test on the Board
-        for( int i = 1; i <= 1; i++) {
+        for( int i = 1; i <= 6; i++) {
             System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, strAgain, boardCount, emptyCells, board, winCountArray);
             //System.out.println("testResult: " + testResult);
@@ -312,12 +342,12 @@ public class tictactoe {
     }
 
     public static void BoardState(char [][] board) {
-        System.out.println("Entering 'BoardState'");
+        //System.out.println("Entering 'BoardState'");
         //System.out.println("**************************************************************");
         boolean allTestCompleted = StateChecks(board);
         //System.out.println("**************************************************************");
-        System.out.println("All Tests Completed: "+ allTestCompleted);
         System.out.println("Exiting 'BoardState'");
+        System.out.println("All Tests Completed: "+ allTestCompleted);
     }
 
     public static char CheckSymbol(String str, int symbolCount) {
@@ -382,7 +412,7 @@ public class tictactoe {
         char[][] ex8 = new char[][] {{'_','O','O'},{'O','O','_'},{'X','_','X'}};  //DEBUG CODE  t7
         char[][] ex9 = new char[][] {{'X','X','X'},{'O','O','O'},{'_','_','_'}};  //DEBUG CODE
 
-        char[][] ex = ex5;  //DEBUG CODE
+        char[][] ex = ex1;  //DEBUG CODE
 
         board = deepCopyMatrix(ex); //DEBUG CODE
         userSymbolInputCount = 9;  //DEBUG CODE
