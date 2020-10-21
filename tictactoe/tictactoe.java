@@ -56,22 +56,6 @@ public class tictactoe {
         return boardCount;
     }
 
-    public static boolean Check7(int[] boardCount, int[] winCount) {
-        boolean checkResult = false;
-        int diff = boardCount[0] - boardCount[1];
-        System.out.println("Check7");
-        System.out.println("boardCount: "   + Arrays.toString(boardCount)
-                + "  winChecks: " + Arrays.toString(winCount)
-                + "  diff: " + diff);
-        if (diff <= -2) {
-            System.out.print("Imposible: O count is greater than X count (2 or more)  " + checkResult);
-            System.out.println("diff: " + diff);
-            checkResult = true;
-        }
-        //System.out.println();
-        return checkResult;
-    }
-
     public static boolean Check6(int[] boardCount, int[] winCount) {
         // Impossible 2 - t6/ex7
         boolean checkResult = false;
@@ -398,7 +382,7 @@ public class tictactoe {
         char[][] ex8 = new char[][] {{'_','O','O'},{'O','O','_'},{'X','_','X'}};  //DEBUG CODE  t7
         char[][] ex9 = new char[][] {{'X','X','X'},{'O','O','O'},{'_','_','_'}};  //DEBUG CODE
 
-        char[][] ex = ex8;  //DEBUG CODE
+        char[][] ex = ex7;  //DEBUG CODE
 
         board = deepCopyMatrix(ex); //DEBUG CODE
         userSymbolInputCount = 9;  //DEBUG CODE
