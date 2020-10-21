@@ -2,7 +2,7 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
-//branch: Cleanup
+//branch: Master
 public class tictactoe {
 
     // deepCopy is in code base only for testing and debugging
