@@ -4,7 +4,7 @@ import  java.util.Scanner;
 
 //branch: Master
 public class tictactoe {
-
+/****************************************************************
     // deepCopy is in code base only for testing and debugging
     public static char[][] deepCopyMatrix(char[][] input) {
         if (input == null) {
@@ -16,6 +16,7 @@ public class tictactoe {
         }
         return result;
     }
+*******************************************************************/
 
     public static boolean CheckEmptyCells(int[] boardCount) {
         //System.out.println("Empty Cells ?");
@@ -326,6 +327,7 @@ public class tictactoe {
     public static void main(String[] args) {
         int userSymbolInputCount;
         char[][] board = new char[3][3];  //REAL CODE
+        /******************************************************************************************
         char[][] ex1 = new char[][] {{'X','X','X'},{'O','O','_'},{'_','O','_'}};  //DEBUG CODE  t3
         char[][] ex2 = new char[][] {{'X','O','X'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE  t3
         char[][] ex3 = new char[][] {{'X','O','O'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE  t4
@@ -337,10 +339,10 @@ public class tictactoe {
         char[][] ex9 = new char[][] {{'X','X','X'},{'O','O','O'},{'_','_','_'}};  //DEBUG CODE
 
         char[][] ex = ex9;  //DEBUG CODE
-
-        board = deepCopyMatrix(ex); //DEBUG CODE
-        userSymbolInputCount = 9;  //DEBUG CODE
-        //userSymbolInputCount =  UserInput(board);  //REAL CODE
+        ********************************************************************************************/
+        //board = deepCopyMatrix(ex); //DEBUG CODE
+        //userSymbolInputCount = 9;  //DEBUG CODE
+        userSymbolInputCount =  UserInput(board);  //REAL CODE
         //System.out.println(Arrays.deepToString(board));
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
