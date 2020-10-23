@@ -4,19 +4,6 @@ import  java.util.Scanner;
 
 //branch: Master
 public class tictactoe {
-/****************************************************************
-    // deepCopy is in code base only for testing and debugging
-    public static char[][] deepCopyMatrix(char[][] input) {
-        if (input == null) {
-            return null;
-        }
-        char[][] result = new char[input.length][];
-        for (int r = 0; r < input.length; r++) {
-            result[r] = input[r].clone();
-        }
-        return result;
-    }
-*******************************************************************/
 
     public static boolean CheckEmptyCells(int[] boardCount) {
         //System.out.println("Empty Cells ?");
@@ -61,10 +48,10 @@ public class tictactoe {
         boolean checkResult = false;
         int diff = boardCount[0] - boardCount[1];
         //System.out.println("Check6 - Impossible2");
-        if (diff >= 2 || diff <= -2) {
+        if (diff >= 2 || diff <= -2)  {
             checkResult = true;
            //System.out.println(Arrays.toString(boardCount) + " " + Arrays.toString(winCount) + " " + diff);
-            System.out.print("Impossible");
+            System.out.print("Impossible 2");
         }
         return checkResult;
     }
@@ -72,13 +59,11 @@ public class tictactoe {
     public static boolean Check5(int[] winCount) {
         // Impossible 1 - t5/ex6
         boolean checkResult = false;
-        //int diff = boardCount[0] - boardCount[1];
-        //System.out.println("Check5 - Impossible 1");
-        //boolean emptyCells = CheckEmptyCells(boardCount);
+
         if (winCount[0] >= 1 && winCount[1] >= 1) {
             checkResult = true;
             //System.out.println(Arrays.toString(boardCount) + " " + Arrays.toString(winCount) + " " + diff);
-            System.out.println("Impossible");
+            System.out.println("Impossible 1");
         }
         return checkResult;
     }
@@ -86,9 +71,7 @@ public class tictactoe {
     public static boolean Check4(int[] winCount) {
         // O Wins - t4/ex3
         boolean checkResult = false;
-        //int diff = boardCount[0] - boardCount[1];
-        //System.out.println("Check4 - O Wins");
-        //boolean emptyCells = CheckEmptyCells(boardCount);
+
         if (winCount[0] == 0 && winCount[1] == 1) {
             checkResult = true;
             //System.out.println(Arrays.toString(boardCount) + " " + Arrays.toString(winCount) + " " + diff);
@@ -100,9 +83,7 @@ public class tictactoe {
     public static boolean Check3(int[] winCount) {
         // X Wins - t3/ex1, ex2
         boolean checkResult = false;
-        //int diff = boardCount[0] - boardCount[1];
-        //System.out.println("Check3 - X Wins");
-        //boolean emptyCells = CheckEmptyCells(boardCount);
+
         if (winCount[0] == 1 && winCount[1] == 0) {
             checkResult = true;
             //System.out.println(Arrays.toString(boardCount) + " " + Arrays.toString(winCount) + " " + diff);
@@ -114,8 +95,7 @@ public class tictactoe {
     public static boolean Check2(int[] boardCount, int[] winCount) {
         // Draw - t2/ex4
         boolean checkResult = false;
-        //int diff = boardCount[0] - boardCount[1];
-        //System.out.println("Check2 - Draw");
+
         boolean emptyCells = CheckEmptyCells(boardCount);
         if (winCount[0] == 0 && winCount[1] == 0 && !emptyCells) {
             checkResult = true;
@@ -244,36 +224,22 @@ public class tictactoe {
         // winChecks - check for X or O winner
         int[] winCountArray = winChecks(strAgain.toString(), board);
 
-        //* Check for empty cells
-        //boolean emptyCells = CheckEmptyCells(boardCount);
-        //CheckEmptyCells(boardCount);
-
-        // Report vital game analysis data
-      //System.out.println("*************************************************************");
-      //System.out.println("boardCount: "   + Arrays.toString(boardCount)
-      //        + "  winChecks: " + Arrays.toString(winCountArray)
-      //        + "  emptyCells: " + emptyCells);
-      //System.out.println("**************************************************************");
-        //System.out.println();
-
         // Go to StateChecks for each desired test on the Board
         for( int i = 1; i <= 6; i++) {
          // System.out.println("StateChecks: " + i );
             testResult = RunChecks( i, boardCount, winCountArray);
+            if (testResult) {
+                break;
+            }
          // System.out.println();
         }
         return testResult;
     }
-
+/**********************************************************
     public static void BoardState(char [][] board) {
-        //System.out.println("Entering 'BoardState'");
-        //System.out.println("**************************************************************");
         boolean allTestCompleted = StateChecks(board);
-        //System.out.println("**************************************************************");
-        //System.out.println();
-        //System.out.println("Exiting 'BoardState'");
-        //System.out.println("All Tests Completed: "+ allTestCompleted);
     }
+************************************************************/
 
     public static char CheckSymbol(String str, int symbolCount) {
         char symbol = str.charAt(symbolCount);
@@ -326,27 +292,13 @@ public class tictactoe {
 
     public static void main(String[] args) {
         int userSymbolInputCount;
-        char[][] board = new char[3][3];  //REAL CODE
-        /******************************************************************************************
-        char[][] ex1 = new char[][] {{'X','X','X'},{'O','O','_'},{'_','O','_'}};  //DEBUG CODE  t3
-        char[][] ex2 = new char[][] {{'X','O','X'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE  t3
-        char[][] ex3 = new char[][] {{'X','O','O'},{'O','X','O'},{'X','X','O'}};  //DEBUG CODE  t4
-        char[][] ex4 = new char[][] {{'X','O','X'},{'O','O','X'},{'X','X','O'}};  //DEBUG CODE  t2
-        char[][] ex5 = new char[][] {{'X','O','_'},{'O','O','X'},{'_','X','_'}};  //DEBUG CODE  t1
-        char[][] ex6 = new char[][] {{'X','O','_'},{'X','O','_'},{'X','O','X'}};  //DEBUG CODE  t5
-        char[][] ex7 = new char[][] {{'_','O','_'},{'X','_','_'},{'X','_','X'}};  //DEBUG CODE  t6
-        char[][] ex8 = new char[][] {{'_','O','O'},{'O','O','_'},{'X','_','X'}};  //DEBUG CODE  t7
-        char[][] ex9 = new char[][] {{'X','X','X'},{'O','O','O'},{'_','_','_'}};  //DEBUG CODE
+        char[][] board = new char[3][3];
+        userSymbolInputCount =  UserInput(board);
 
-        char[][] ex = ex9;  //DEBUG CODE
-        ********************************************************************************************/
-        //board = deepCopyMatrix(ex); //DEBUG CODE
-        //userSymbolInputCount = 9;  //DEBUG CODE
-        userSymbolInputCount =  UserInput(board);  //REAL CODE
-        //System.out.println(Arrays.deepToString(board));
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
-            BoardState(board);
+            //BoardState(board);
+            StateChecks(board);
         }
     }
 }
