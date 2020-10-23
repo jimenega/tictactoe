@@ -2,6 +2,7 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
+//Final submitted 10/23/2020
 public class Main {
 
     public static boolean CheckEmptyCells(int[] boardCount) {
