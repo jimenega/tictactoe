@@ -2,7 +2,7 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
-public class tictactoe {
+public class Main {
 
     public static boolean CheckEmptyCells(int[] boardCount) {
         boolean emptyCells = true;
@@ -66,7 +66,7 @@ public class tictactoe {
 
         if (winCount[0] == 0 && winCount[1] == 1) {
             checkResult = true;
-            System.out.println("O Wins");
+            System.out.println("O wins");
         }
         return checkResult;
     }
@@ -76,7 +76,7 @@ public class tictactoe {
 
         if (winCount[0] == 1 && winCount[1] == 0) {
             checkResult = true;
-            System.out.println("X Wins");
+            System.out.println("X wins");
         }
         return checkResult;
     }
