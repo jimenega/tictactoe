@@ -2,7 +2,7 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
-//Final submitted 10/23/2020
+//tttStage4-00
 public class Main {
 
     public static boolean CheckEmptyCells(int[] boardCount) {
@@ -32,7 +32,6 @@ public class Main {
                     break;
                 default:
                     System.out.println("?? location: BoardCount/switch/default");
-                    //symbol = ' ';
                     break;
             }
         }
@@ -40,6 +39,18 @@ public class Main {
         boardCount[1] = countO;  // Array Index 1 is the O counter
         boardCount[2] = count_; // Array Index _ is the _ counter
         return boardCount;
+    }
+
+    public static StringBuilder ArrayToStr(char [][] board) {
+        // Convert Array board back to a String
+        String boardAgain = Arrays.deepToString(board);
+        StringBuilder strAgain = new StringBuilder();
+        for(int i = 2; i < 32; i++) {
+            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
+                strAgain.append(boardAgain.charAt(i));
+            }
+        }
+        return strAgain;
     }
 
     public static boolean Check6(int[] boardCount) {
@@ -105,22 +116,27 @@ public class Main {
     }
 
     public static int[] winChecks(String str, char[][] board) {
-        String r1, r2, r3;
-        String c1, c2, c3;
-        String df, db;
-        String X3 = "XXX";
-        String O3 = "OOO";
+        String r1, r2, r3, c1, c2, c3, df, db, X3 = "XXX", O3 = "OOO";
+        // Find a Win in rows
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         r1 = r1.substring(0, 3);
         r2 = r2.substring(0, 3);
         r3 = r3.substring(0, 3);
+
+        // Transpose matrix for column checks
         String strTrans =  matrixTranspose(board);
+
+        // Find a Win in columns
         c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
         c1 = c1.substring(0, 3);
         c2 = c2.substring(0, 3);
         c3 = c3.substring(0, 3);
+
+        // Find a Win in diagonals
         df = String.valueOf(str.charAt(2)) + str.charAt(4) + str.charAt(6);
         db = String.valueOf(str.charAt(0)) + str.charAt(4) + str.charAt(8);
+
+        // Build winCount Array
         String[] winArray = new String[] {r1, r2, r3, c1, c2, c3, df, db};
         int[] winCountArray = new int[] {0, 0};
 
@@ -143,15 +159,8 @@ public class Main {
                 inArray[j][i] = temp;
             }
         }
-
         // Convert transposed inArray to a String
-        String boardAgain = Arrays.deepToString(inArray);
-        StringBuilder strAgain = new StringBuilder();
-        for(int i = 2; i < 32; i++) {
-            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
-                strAgain.append(boardAgain.charAt(i));
-            }
-        }
+        StringBuilder strAgain = ArrayToStr(inArray);
         return strAgain.toString();
     }
 
@@ -193,13 +202,7 @@ public class Main {
         boolean testResult;
 
         // Convert Array board back to a String
-        String boardAgain = Arrays.deepToString(board);
-        StringBuilder strAgain = new StringBuilder();
-        for(int i = 2; i < 32; i++) {
-            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
-                strAgain.append(boardAgain.charAt(i));
-            }
-        }
+        StringBuilder strAgain = ArrayToStr(board);
 
         // boardCount - Get the count of each slot for X, O, _
         int[] boardCount = BoardCount(strAgain.toString());
@@ -214,9 +217,7 @@ public class Main {
             if (testResult) {
                 break;
             }
-         // System.out.println();
         }
-        //return testResult;
     }
 
     public static char CheckSymbol(String str, int symbolCount) {
