@@ -116,7 +116,11 @@ public class Main {
     }
 
     public static int[] winChecks(String str, char[][] board) {
-        String r1, r2, r3, c1, c2, c3, df, db, X3 = "XXX", O3 = "OOO";
+        String r1, r2, r3, c1, c2, c3, df, db;
+
+        // Reference used to find Wins
+        String X3 = "XXX", O3 = "OOO";
+
         // Find a Win in rows
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         r1 = r1.substring(0, 3);
@@ -140,6 +144,7 @@ public class Main {
         String[] winArray = new String[] {r1, r2, r3, c1, c2, c3, df, db};
         int[] winCountArray = new int[] {0, 0};
 
+        // Find Wins: X or O
         for( int i = 0; i <= 7; i++) {
             if (X3.equals(winArray[i])) {
                 winCountArray[0]++;
