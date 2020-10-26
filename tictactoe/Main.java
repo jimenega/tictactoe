@@ -203,7 +203,12 @@ public class Main {
         }
     }
 
-    public static void StateChecks(char [][] board) {
+    public static void Session(char player, char[][] board) {
+        System.out.println("Player: "+ player);
+
+    }
+
+    public static void StateChecks(char[][] board) {
         boolean testResult;
 
         // Convert Array board back to a String
@@ -275,13 +280,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int userSymbolInputCount;
-        char[][] board = new char[3][3];
-        userSymbolInputCount =  UserInput(board);
+        //int userSymbolInputCount;                     REAL CODE
+        //char[][] board = new char[3][3];              REAL CODE
+        //userSymbolInputCount =  UserInput(board);     REAL CODE
+        //userSymbolInputCount =  UserInput(board);     REAL CODE
+        int userSymbolInputCount = 9;                                                 // DEBUG CODE
+        char[][] board = new char[][] {{'X','X','X'}, {'O','O','O'}, {'_','_','_'}};  // DEBUG CODE
 
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
-            StateChecks(board);
+            //StateChecks(board);
+            Session('X',board);
         }
     }
 }
