@@ -228,63 +228,53 @@ public class Main {
     }
 */
 
-    public static void getCoordinates() {
-        Scanner scanner = new Scanner(System.in);
-        //int[] playerEntry = new int[] {1, 2};
-        //String s = "Hello World! 3 + 3.0 = 6.0 true ";
-        //
-        // create a new scanner with the specified String Object
-        //Scanner scanner = new Scanner(s);
-
+    public static void getCoordinates(String coordinates) {
+        Scanner scanner = new Scanner(coordinates);
         // find the next int token and print it
         // loop for the whole scanner
+        int c1 = 0;
+        int c2 = 0;
         while (scanner.hasNext()) {
-
             // if the next is a int, print found and the int
+
             if (scanner.hasNextInt()) {
-                System.out.println("Found :" + scanner.nextInt());
-            } else {
-                System.out.println("You should enter numbers!");
+                int c = scanner.nextInt();
+                System.out.println("Integer:" + c);
+            } else if (scanner.hasNext()) {
+                //System.out.println("You should enter numbers!");
+                String s = scanner.next();
+                System.out.println("Not Integer: " + s);
             }
+
             // if no int is found, print "Not Found:" and the token
-            System.out.println("Not Found :" + scanner.next());
+            // System.out.println("Not Found :" + scanner.next());
         }
-
-        // close the scanner
-        //scanner.close();
+        scanner.close();
     }
 
-    public static void getChar2() {
-        // Initialize Scanner object
-        //Scanner scan = new Scanner("This 1 a 2 sample string");
-        Scanner scan = new Scanner(System.in);
-        // Printing the delimiter used
-        System.out.println("Delimiter: " + scan.delimiter());
-        // Printing the tokenized Strings
 
-        //while(scan.hasNext()) {
-            //if (scan.equals()) { break;}
-            //scan.hasNext();
-            String c = scan.nextLine();
-            //System.out.println(scan.next());
-            System.out.println(c);
-            //System.out.println();
-        //}
-        // closing the scanner stream
-        scan.close();
+    public static String getChar() {
+        Scanner scanner = new Scanner(System.in);
+        String coordinates = scanner.nextLine();
+        //System.out.println(c);
+        scanner.close();
+        return coordinates;
     }
+/*
+    public static void getCoordinates(String coordinates) {
+        Scanner scanner = new Scanner(coordinates);
+        // find the next int token and print it
+        while (scanner.hasNext()) {
+            String str = scanner.next();
+            System.out.println(str);
+        }
+        scanner.close();
+    }
+*/
 
     public static void Session(char player, char[][] board) {
-        //Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the coordinates: ");
-        //String s = scanner.next();
-        //var coordinate1 = scanner.hasNextInt();
-        //var coordinate2 = scanner.hasNextInt();
-        //System.out.println(coordinate1 + " " + coordinate2);
-        //getCoordinates();
-        //getChar2();
-        getChar2();
-
+        getCoordinates(getChar());
     }
 
     public static void StateChecks(char[][] board) {
