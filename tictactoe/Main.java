@@ -234,29 +234,43 @@ public class Main {
         // loop for the whole scanner
         int c1 = 0;
         int c2 = 0;
+        int count = 0;
+        int icount = 0;
+        int ccount = 0;
+
         while (scanner.hasNext()) {
             // if the next is a int, print found and the int
-
+            count++;
             if (scanner.hasNextInt()) {
                 int c = scanner.nextInt();
-                System.out.println("Integer:" + c);
+                if (count == 1) {
+                    c1 = c;
+                } else {
+                    c2 = c;
+                }
+                    icount++;
+                //System.out.println("Integer:" + c);
             } else if (scanner.hasNext()) {
                 //System.out.println("You should enter numbers!");
                 String s = scanner.next();
-                System.out.println("Not Integer: " + s);
+                ccount++;
+                //System.out.println("Not Integer: " + s);
             }
-
             // if no int is found, print "Not Found:" and the token
             // System.out.println("Not Found :" + scanner.next());
         }
+        System.out.println("count:  " + count);
+        System.out.println("icount: " + icount);
+        System.out.println("ccount: " + ccount);
+        System.out.println("c1: " + c1 + " c2: " + c2);
+        if (ccount > 0) { System.out.println("You should enter numbers!");}
+        if (c1 > 3 || c2 > 3) { System.out.println("Coordinates should be from 1 to 3!");}
         scanner.close();
     }
-
 
     public static String getChar() {
         Scanner scanner = new Scanner(System.in);
         String coordinates = scanner.nextLine();
-        //System.out.println(c);
         scanner.close();
         return coordinates;
     }
