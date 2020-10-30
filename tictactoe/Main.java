@@ -4,6 +4,7 @@ import  java.util.Scanner;
 
 //tttStage4-00
 public class Main {
+    //final static Scanner scanner = new Scanner(System.in); DEBUG CODE
 
     public static boolean CheckEmptyCells(int[] boardCount) {
         boolean emptyCells = true;
@@ -121,7 +122,7 @@ public class Main {
         // Reference used to find Wins
         String X3 = "XXX", O3 = "OOO";
 
-        // Find a Win in rows
+        // rows
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         r1 = r1.substring(0, 3);
         r2 = r2.substring(0, 3);
@@ -130,7 +131,7 @@ public class Main {
         // Transpose matrix for column checks
         String strTrans =  matrixTranspose(board);
 
-        // Find a Win in columns
+        // columns
         c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
         c1 = c1.substring(0, 3);
         c2 = c2.substring(0, 3);
@@ -203,7 +204,88 @@ public class Main {
         }
     }
 
-    public static void StateChecks(char [][] board) {
+    public static int[] getCoordinates(String coordinates) {
+        Scanner scanner = new Scanner(coordinates);
+        // find the next int token and print it
+        // loop for the whole scanner
+        int c1 = 0;
+        int c2 = 0;
+        int count = 0;
+        int icount = 0;
+        int ccount = 0;
+        int[] validCoordinates = new int[] {c1,c2};
+
+        while (scanner.hasNext()) {
+            count++;
+            if (scanner.hasNextInt()) {
+                int c = scanner.nextInt();
+                if (count == 1) {
+                    c1 = c;
+                } else {
+                    c2 = c;
+                }
+                    icount++;
+            } else if (scanner.hasNext()) {
+                String s = scanner.next();
+                ccount++;
+            }
+        }
+        System.out.println("count:  " + count);
+        System.out.println("icount: " + icount);
+        System.out.println("ccount: " + ccount);
+        System.out.println("c1: " + c1 + " c2: " + c2);
+        if (ccount > 0) { System.out.println("You should enter numbers!");}
+        if (c1 > 3 || c2 > 3) {
+            System.out.println("Coordinates should be from 1 to 3!");
+        } else {
+            validCoordinates[0] = c1;
+            validCoordinates[1] = c2;
+        }
+        scanner.close();
+        return validCoordinates;
+    }
+
+    public static String getChar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the coordinates: ");
+        String coordinates = scanner.nextLine();
+        //scanner.close(); this creates error
+        return coordinates;
+    }
+
+    public static void Session(char player, char[][] board) {
+        int[] validCoordinates = getCoordinates(getChar());
+
+        while (validCoordinates[0] == 0) {
+            validCoordinates = getCoordinates(getChar());
+        }
+        System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
+    }
+
+/*
+    public static void Session(char player, char[][] board) {
+        //System.out.print("Enter the coordinates: ");
+        int[] validCoordinates = getCoordinates(getChar());
+        System.out.println("S1: " + validCoordinates[0] + " " + validCoordinates[1]);
+        validCoordinates = getCoordinates(getChar());
+        System.out.println("s2: " + validCoordinates[0] + " " + validCoordinates[1]);
+    }
+
+    /*
+    public static void Session(char player, char[][] board) {
+
+        int[] validCoordinates = getCoordinates(getChar());
+        if (validCoordinates[0] != 0) {
+            System.out.println("Looks like valid coordinates");
+        } else {
+            validCoordinates = getCoordinates(getChar());
+        }
+
+        System.out.println(validCoordinates[0] + " " + validCoordinates[1]);
+    }
+*/
+
+    public static void StateChecks(char[][] board) {
         boolean testResult;
 
         // Convert Array board back to a String
@@ -275,13 +357,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int userSymbolInputCount;
-        char[][] board = new char[3][3];
-        userSymbolInputCount =  UserInput(board);
+        //int userSymbolInputCount;                     REAL CODE
+        //char[][] board = new char[3][3];              REAL CODE
+        //userSymbolInputCount =  UserInput(board);     REAL CODE
+        //userSymbolInputCount =  UserInput(board);     REAL CODE
+        int userSymbolInputCount = 9;                                                 // DEBUG CODE
+        char[][] board = new char[][] {{'X','X','X'}, {'O','O','O'}, {'_','_','_'}};  // DEBUG CODE
 
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
-            StateChecks(board);
+            //StateChecks(board);
+            Session('X',board);
+
         }
     }
 }
