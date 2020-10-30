@@ -122,7 +122,7 @@ public class Main {
         // Reference used to find Wins
         String X3 = "XXX", O3 = "OOO";
 
-        // Find a Win in rows
+        // rows
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         r1 = r1.substring(0, 3);
         r2 = r2.substring(0, 3);
@@ -131,7 +131,7 @@ public class Main {
         // Transpose matrix for column checks
         String strTrans =  matrixTranspose(board);
 
-        // Find a Win in columns
+        // columns
         c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
         c1 = c1.substring(0, 3);
         c2 = c2.substring(0, 3);
@@ -204,31 +204,7 @@ public class Main {
         }
     }
 
-    /*
-    public static void getChar() {
-        //Scanner charScanner = new Scanner( System.in ).useDelimiter( "(\\b|\\B)" ) ;
-        Scanner charScanner = new Scanner( System.in ).useDelimiter((" "));
-        while( charScanner.hasNext() )
-            System.out.print( charScanner.next() );
-
-    }
-
-    public static void getChar2() {
-        // Initialize Scanner object
-        //Scanner scan = new Scanner("This 1 a 2 sample string");
-        Scanner scan = new Scanner(System.in);
-        // Printing the delimiter used
-        System.out.println("Delimiter: " + scan.delimiter());
-        // Printing the tokenized Strings
-        while(scan.hasNext()){
-            System.out.println(scan.next());
-        }
-        // closing the scanner stream
-        scan.close();
-    }
-*/
-
-    public static void getCoordinates(String coordinates) {
+    public static int[] getCoordinates(String coordinates) {
         Scanner scanner = new Scanner(coordinates);
         // find the next int token and print it
         // loop for the whole scanner
@@ -237,9 +213,9 @@ public class Main {
         int count = 0;
         int icount = 0;
         int ccount = 0;
+        int[] validCoordinates = new int[] {c1,c2};
 
         while (scanner.hasNext()) {
-            // if the next is a int, print found and the int
             count++;
             if (scanner.hasNextInt()) {
                 int c = scanner.nextInt();
@@ -249,47 +225,65 @@ public class Main {
                     c2 = c;
                 }
                     icount++;
-                //System.out.println("Integer:" + c);
             } else if (scanner.hasNext()) {
-                //System.out.println("You should enter numbers!");
                 String s = scanner.next();
                 ccount++;
-                //System.out.println("Not Integer: " + s);
             }
-            // if no int is found, print "Not Found:" and the token
-            // System.out.println("Not Found :" + scanner.next());
         }
         System.out.println("count:  " + count);
         System.out.println("icount: " + icount);
         System.out.println("ccount: " + ccount);
         System.out.println("c1: " + c1 + " c2: " + c2);
         if (ccount > 0) { System.out.println("You should enter numbers!");}
-        if (c1 > 3 || c2 > 3) { System.out.println("Coordinates should be from 1 to 3!");}
+        if (c1 > 3 || c2 > 3) {
+            System.out.println("Coordinates should be from 1 to 3!");
+        } else {
+            validCoordinates[0] = c1;
+            validCoordinates[1] = c2;
+        }
         scanner.close();
+        return validCoordinates;
     }
 
     public static String getChar() {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the coordinates: ");
         String coordinates = scanner.nextLine();
-        scanner.close();
+        //scanner.close(); this creates error
         return coordinates;
     }
-/*
-    public static void getCoordinates(String coordinates) {
-        Scanner scanner = new Scanner(coordinates);
-        // find the next int token and print it
-        while (scanner.hasNext()) {
-            String str = scanner.next();
-            System.out.println(str);
-        }
-        scanner.close();
-    }
-*/
 
     public static void Session(char player, char[][] board) {
-        System.out.print("Enter the coordinates: ");
-        getCoordinates(getChar());
+        int[] validCoordinates = getCoordinates(getChar());
+
+        while (validCoordinates[0] == 0) {
+            validCoordinates = getCoordinates(getChar());
+        }
+        System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
     }
+
+/*
+    public static void Session(char player, char[][] board) {
+        //System.out.print("Enter the coordinates: ");
+        int[] validCoordinates = getCoordinates(getChar());
+        System.out.println("S1: " + validCoordinates[0] + " " + validCoordinates[1]);
+        validCoordinates = getCoordinates(getChar());
+        System.out.println("s2: " + validCoordinates[0] + " " + validCoordinates[1]);
+    }
+
+    /*
+    public static void Session(char player, char[][] board) {
+
+        int[] validCoordinates = getCoordinates(getChar());
+        if (validCoordinates[0] != 0) {
+            System.out.println("Looks like valid coordinates");
+        } else {
+            validCoordinates = getCoordinates(getChar());
+        }
+
+        System.out.println(validCoordinates[0] + " " + validCoordinates[1]);
+    }
+*/
 
     public static void StateChecks(char[][] board) {
         boolean testResult;
@@ -374,6 +368,7 @@ public class Main {
             StatusDisplay(board);
             //StateChecks(board);
             Session('X',board);
+
         }
     }
 }
