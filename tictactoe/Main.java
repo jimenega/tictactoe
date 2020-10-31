@@ -254,13 +254,47 @@ public class Main {
         return coordinates;
     }
 
+    public static boolean fieldEmpty(int[] vCoordinates, char[][] board) {
+        //boolean fldEmpty;
+        int[][] selectArray = new int[][] {{1,1},{1,2},{1,3},{2,1},{2,2},{2,3},{3,1},{3,2},{3,3}};
+        int[][] RealArray   = new int[][] {{2,0},{1,0},{0,0},{2,1},{1,1},{0,1},{2,2},{1,2},{0,2}};
+        //int [] testEmpty = new int[] {0};
+        //System.out.println(Arrays.equals(vCoordinates, ));
+        System.out.println(Arrays.deepToString(board));
+        System.out.println(Arrays.toString(vCoordinates));
+        int indexToReal = 0;
+        for ( int[] Selected : selectArray) {
+            boolean equals = Arrays.equals(Selected, vCoordinates);
+            //System.out.println(equals);
+            //System.out.println("i:" + i);
+            if (equals) break;
+            indexToReal++;
+        }
+        System.out.println("indexToReal:" + indexToReal);
+        System.out.println(Arrays.toString(RealArray[indexToReal]));
+        int vC1 = RealArray[indexToReal][0];
+        int vC2 = RealArray[indexToReal][1];
+        System.out.println(vC1 + " " + vC2);
+        System.out.println(board[vC1][vC2]);
+        /*
+        if (board[vC1][vC2] == '_') {
+            fldEmpty = true;
+        } else fldEmpty = false;
+         */
+        return board[vC1][vC2] == '_';
+    }
+
+
     public static void Session(char player, char[][] board) {
         int[] validCoordinates;
         do {
             validCoordinates = getCoordinates(getChar());
         } while (validCoordinates[0] == 0);
-
         System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
+        boolean fEmpty = fieldEmpty(validCoordinates, board);
+        System.out.println(fEmpty);
+        //System.out.println(Arrays.equals());
+
     }
 
     /*
