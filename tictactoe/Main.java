@@ -234,8 +234,9 @@ public class Main {
         System.out.println("icount: " + icount);
         System.out.println("ccount: " + ccount);
         System.out.println("c1: " + c1 + " c2: " + c2);
-        if (ccount > 0) { System.out.println("You should enter numbers!");}
-        if (c1 > 3 || c2 > 3) {
+        if (ccount > 0) {
+            System.out.println("You should enter numbers!");
+        } else if (c1 > 3 || c2 > 3) {
             System.out.println("Coordinates should be from 1 to 3!");
         } else {
             validCoordinates[0] = c1;
@@ -254,6 +255,16 @@ public class Main {
     }
 
     public static void Session(char player, char[][] board) {
+        int[] validCoordinates;
+        do {
+            validCoordinates = getCoordinates(getChar());
+        } while (validCoordinates[0] == 0);
+
+        System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
+    }
+
+    /*
+    public static void Session(char player, char[][] board) {
         int[] validCoordinates = getCoordinates(getChar());
 
         while (validCoordinates[0] == 0) {
@@ -261,6 +272,7 @@ public class Main {
         }
         System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
     }
+*/
 
 /*
     public static void Session(char player, char[][] board) {
