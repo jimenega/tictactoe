@@ -210,7 +210,7 @@ public class Main {
         int icount = 0;
         int ccount = 0;
         int[] validCoordinates = new int[] {c1,c2};
-        int[] realValidCoodinates = new int[] {-1,-1};
+        int[] realValidCoordinates = new int[] {-1,-1};
 
         // find the next int token
         while (scanner.hasNext()) {
@@ -247,19 +247,18 @@ public class Main {
             int vC1 = RealArray[indexToReal][0];
             int vC2 = RealArray[indexToReal][1];
             if (board[vC1][vC2] == '_') {
-                realValidCoodinates[0] = vC1;
-                realValidCoodinates[1] = vC2;
+                realValidCoordinates[0] = vC1;
+                realValidCoordinates[1] = vC2;
             } else
                 System.out.println("This cell is occupied! Choose another one!");
         }
         scanner.close();
-        return realValidCoodinates ;
+        return realValidCoordinates ;
     }
 
     public static String getChar() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the coordinates: ");
-        //String coordinates = scanner.nextLine();
         return scanner.nextLine();
     }
 
@@ -345,16 +344,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //int userSymbolInputCount;                     REAL CODE
-        //char[][] board = new char[3][3];              REAL CODE
-        //userSymbolInputCount =  UserInput(board);     REAL CODE
-        //userSymbolInputCount =  UserInput(board);     REAL CODE
-        int userSymbolInputCount = 9;                                                 // DEBUG CODE
-        char[][] board = new char[][] {{'X','X','X'}, {'O','O','O'}, {'_','_','_'}};  // DEBUG CODE
+        int userSymbolInputCount;
+        char[][] board = new char[3][3];
+        userSymbolInputCount =  UserInput(board);
 
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
-            //StateChecks(board);
+            //StateChecks(board); Do not delete
             Session('X',board);
         }
     }
