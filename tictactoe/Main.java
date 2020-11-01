@@ -2,7 +2,6 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
-//Final submitted 10/23/2020
 public class Main {
 
     public static boolean CheckEmptyCells(int[] boardCount) {
@@ -32,7 +31,6 @@ public class Main {
                     break;
                 default:
                     System.out.println("?? location: BoardCount/switch/default");
-                    //symbol = ' ';
                     break;
             }
         }
@@ -40,6 +38,18 @@ public class Main {
         boardCount[1] = countO;  // Array Index 1 is the O counter
         boardCount[2] = count_; // Array Index _ is the _ counter
         return boardCount;
+    }
+
+    public static StringBuilder ArrayToStr(char [][] board) {
+        // Convert Array board back to a String
+        String boardAgain = Arrays.deepToString(board);
+        StringBuilder strAgain = new StringBuilder();
+        for(int i = 2; i < 32; i++) {
+            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
+                strAgain.append(boardAgain.charAt(i));
+            }
+        }
+        return strAgain;
     }
 
     public static boolean Check6(int[] boardCount) {
@@ -105,25 +115,35 @@ public class Main {
     }
 
     public static int[] winChecks(String str, char[][] board) {
-        String r1, r2, r3;
-        String c1, c2, c3;
-        String df, db;
-        String X3 = "XXX";
-        String O3 = "OOO";
+        String r1, r2, r3, c1, c2, c3, df, db;
+
+        // Reference used to find Wins
+        String X3 = "XXX", O3 = "OOO";
+
+        // rows
         r1 = rotate(r2 = rotate(r3 = rotate(str, 3), 3),3);
         r1 = r1.substring(0, 3);
         r2 = r2.substring(0, 3);
         r3 = r3.substring(0, 3);
+
+        // Transpose matrix for column checks
         String strTrans =  matrixTranspose(board);
+
+        // columns
         c1 = rotate(c2 = rotate(c3 = rotate(strTrans, 3), 3),3);
         c1 = c1.substring(0, 3);
         c2 = c2.substring(0, 3);
         c3 = c3.substring(0, 3);
+
+        // Find a Win in diagonals
         df = String.valueOf(str.charAt(2)) + str.charAt(4) + str.charAt(6);
         db = String.valueOf(str.charAt(0)) + str.charAt(4) + str.charAt(8);
+
+        // Build winCount Array
         String[] winArray = new String[] {r1, r2, r3, c1, c2, c3, df, db};
         int[] winCountArray = new int[] {0, 0};
 
+        // Find Wins: X or O
         for( int i = 0; i <= 7; i++) {
             if (X3.equals(winArray[i])) {
                 winCountArray[0]++;
@@ -143,15 +163,8 @@ public class Main {
                 inArray[j][i] = temp;
             }
         }
-
         // Convert transposed inArray to a String
-        String boardAgain = Arrays.deepToString(inArray);
-        StringBuilder strAgain = new StringBuilder();
-        for(int i = 2; i < 32; i++) {
-            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
-                strAgain.append(boardAgain.charAt(i));
-            }
-        }
+        StringBuilder strAgain = ArrayToStr(inArray);
         return strAgain.toString();
     }
 
@@ -189,17 +202,81 @@ public class Main {
         }
     }
 
-    public static void StateChecks(char [][] board) {
+    public static int[] getCoordinates(String coordinates, char[][] board) {
+        Scanner scanner = new Scanner(coordinates);
+        int c1 = 0;
+        int c2 = 0;
+        int count = 0;
+        int icount = 0;
+        int ccount = 0;
+        int[] validCoordinates = new int[] {c1,c2};
+        int[] realValidCoordinates = new int[] {-1,-1};
+
+        // find the next int token
+        while (scanner.hasNext()) {
+            count++;
+            if (scanner.hasNextInt()) {
+                int c = scanner.nextInt();
+                if (count == 1) {
+                    c1 = c;
+                } else {
+                    c2 = c;
+                }
+                   icount++;
+            } else if (scanner.hasNext()) {
+                //String s = scanner.next();
+                scanner.next();
+                ccount++;
+            }
+        }
+        if (ccount > 0 || icount < 2) {
+            System.out.println("You should enter numbers!");
+        } else if (c1 > 3 || c2 > 3) {
+            System.out.println("Coordinates should be from 1 to 3!");
+        } else {
+            validCoordinates[0] = c1;
+            validCoordinates[1] = c2;
+            int[][] selectArray = new int[][]{{1, 1}, {1, 2}, {1, 3}, {2, 1}, {2, 2}, {2, 3}, {3, 1}, {3, 2}, {3, 3}};
+            int[][] RealArray = new int[][]{{2, 0}, {1, 0}, {0, 0}, {2, 1}, {1, 1}, {0, 1}, {2, 2}, {1, 2}, {0, 2}};
+            int indexToReal = 0;
+            for (int[] Selected : selectArray) {
+                boolean equals = Arrays.equals(Selected, validCoordinates);
+                if (equals) break;
+                indexToReal++;
+            }
+            int vC1 = RealArray[indexToReal][0];
+            int vC2 = RealArray[indexToReal][1];
+            if (board[vC1][vC2] == '_') {
+                realValidCoordinates[0] = vC1;
+                realValidCoordinates[1] = vC2;
+            } else
+                System.out.println("This cell is occupied! Choose another one!");
+        }
+        scanner.close();
+        return realValidCoordinates ;
+    }
+
+    public static String getChar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the coordinates: ");
+        return scanner.nextLine();
+    }
+
+    public static void Session(char player, char[][] board) {
+        int[] validCoordinates;
+        do {
+            validCoordinates = getCoordinates(getChar(), board);
+        } while (validCoordinates[0] == -1);
+        if (board[validCoordinates[0]] [validCoordinates[1]] == '_')
+            board[validCoordinates[0]] [validCoordinates[1]] = player;
+        StatusDisplay(board);
+    }
+
+    public static void StateChecks(char[][] board) {
         boolean testResult;
 
         // Convert Array board back to a String
-        String boardAgain = Arrays.deepToString(board);
-        StringBuilder strAgain = new StringBuilder();
-        for(int i = 2; i < 32; i++) {
-            if(boardAgain.charAt(i) == 'X' | boardAgain.charAt(i) == 'O' | boardAgain.charAt(i) == '_')  {
-                strAgain.append(boardAgain.charAt(i));
-            }
-        }
+        StringBuilder strAgain = ArrayToStr(board);
 
         // boardCount - Get the count of each slot for X, O, _
         int[] boardCount = BoardCount(strAgain.toString());
@@ -214,9 +291,7 @@ public class Main {
             if (testResult) {
                 break;
             }
-         // System.out.println();
         }
-        //return testResult;
     }
 
     public static char CheckSymbol(String str, int symbolCount) {
@@ -275,7 +350,8 @@ public class Main {
 
         if (userSymbolInputCount >= 9 ) {
             StatusDisplay(board);
-            StateChecks(board);
+            //StateChecks(board); Do not delete
+            Session('X',board);
         }
     }
 }
