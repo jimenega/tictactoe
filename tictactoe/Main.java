@@ -2,9 +2,7 @@ package tictactoe;
 import java.util.Arrays;
 import  java.util.Scanner;
 
-//tttStage4-00
 public class Main {
-    //final static Scanner scanner = new Scanner(System.in); DEBUG CODE
 
     public static boolean CheckEmptyCells(int[] boardCount) {
         boolean emptyCells = true;
@@ -206,8 +204,6 @@ public class Main {
 
     public static int[] getCoordinates(String coordinates, char[][] board) {
         Scanner scanner = new Scanner(coordinates);
-        // find the next int token and print it
-        // loop for the whole scanner
         int c1 = 0;
         int c2 = 0;
         int count = 0;
@@ -216,6 +212,7 @@ public class Main {
         int[] validCoordinates = new int[] {c1,c2};
         int[] realValidCoodinates = new int[] {-1,-1};
 
+        // find the next int token
         while (scanner.hasNext()) {
             count++;
             if (scanner.hasNextInt()) {
@@ -225,46 +222,30 @@ public class Main {
                 } else {
                     c2 = c;
                 }
-                    icount++;
+                   icount++;
             } else if (scanner.hasNext()) {
-                String s = scanner.next();
+                //String s = scanner.next();
+                scanner.next();
                 ccount++;
             }
         }
-        System.out.println("count:  " + count);
-        System.out.println("icount: " + icount);
-        System.out.println("ccount: " + ccount);
-        //System.out.println("c1: " + c1 + " c2: " + c2);
-        if (ccount > 0) {
+        if (ccount > 0 || icount < 2) {
             System.out.println("You should enter numbers!");
         } else if (c1 > 3 || c2 > 3) {
             System.out.println("Coordinates should be from 1 to 3!");
         } else {
             validCoordinates[0] = c1;
             validCoordinates[1] = c2;
-            // Check fieldEmpty
-            boolean fldEmpty;
             int[][] selectArray = new int[][]{{1, 1}, {1, 2}, {1, 3}, {2, 1}, {2, 2}, {2, 3}, {3, 1}, {3, 2}, {3, 3}};
             int[][] RealArray = new int[][]{{2, 0}, {1, 0}, {0, 0}, {2, 1}, {1, 1}, {0, 1}, {2, 2}, {1, 2}, {0, 2}};
-            //int [] testEmpty = new int[] {0};
-            //System.out.println(Arrays.equals(vCoordinates, ));
-            //System.out.println(Arrays.deepToString(board));
-            System.out.println(Arrays.toString(validCoordinates));
             int indexToReal = 0;
             for (int[] Selected : selectArray) {
                 boolean equals = Arrays.equals(Selected, validCoordinates);
-                //System.out.println(equals);
-                //System.out.println("i:" + i);
                 if (equals) break;
                 indexToReal++;
             }
-            //System.out.println("indexToReal:" + indexToReal);
-            System.out.println(Arrays.toString(RealArray[indexToReal]));
             int vC1 = RealArray[indexToReal][0];
             int vC2 = RealArray[indexToReal][1];
-            //System.out.println(vC1 + " " + vC2);
-            System.out.println(board[vC1][vC2]);
-            //fldEmpty = board[vC1][vC2] == '_';
             if (board[vC1][vC2] == '_') {
                 realValidCoodinates[0] = vC1;
                 realValidCoodinates[1] = vC2;
@@ -272,99 +253,25 @@ public class Main {
                 System.out.println("This cell is occupied! Choose another one!");
         }
         scanner.close();
-        return realValidCoodinates ; //PROBLEM with this
-        //return validCoordinates;
+        return realValidCoodinates ;
     }
 
     public static String getChar() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the coordinates: ");
-        String coordinates = scanner.nextLine();
-        //scanner.close(); this creates error
-        return coordinates;
+        //String coordinates = scanner.nextLine();
+        return scanner.nextLine();
     }
-/*
-    public static boolean fieldEmpty(int[] vCoordinates, char[][] board) {
-        boolean fldEmpty;
-        int[][] selectArray = new int[][] {{1,1},{1,2},{1,3},{2,1},{2,2},{2,3},{3,1},{3,2},{3,3}};
-        int[][] RealArray   = new int[][] {{2,0},{1,0},{0,0},{2,1},{1,1},{0,1},{2,2},{1,2},{0,2}};
-        //int [] testEmpty = new int[] {0};
-        //System.out.println(Arrays.equals(vCoordinates, ));
-        System.out.println(Arrays.deepToString(board));
-        System.out.println(Arrays.toString(vCoordinates));
-        int indexToReal = 0;
-        for ( int[] Selected : selectArray) {
-            boolean equals = Arrays.equals(Selected, vCoordinates);
-            //System.out.println(equals);
-            //System.out.println("i:" + i);
-            if (equals) break;
-            indexToReal++;
-        }
-        System.out.println("indexToReal:" + indexToReal);
-        System.out.println(Arrays.toString(RealArray[indexToReal]));
-        int vC1 = RealArray[indexToReal][0];
-        int vC2 = RealArray[indexToReal][1];
-        System.out.println(vC1 + " " + vC2);
-        System.out.println(board[vC1][vC2]);
-        fldEmpty = board[vC1][vC2] == '_';
-
-        //if (board[vC1][vC2] == '_') {
-        //    fldEmpty = true;
-        //} else fldEmpty = false;
-        //
-        //return board[vC1][vC2] == '_';
-        return fldEmpty;
-    }
-*/
 
     public static void Session(char player, char[][] board) {
         int[] validCoordinates;
         do {
             validCoordinates = getCoordinates(getChar(), board);
         } while (validCoordinates[0] == -1);
-        //System.out.println("rVc1: " + validCoordinates[0] + " rVc2: " + validCoordinates[1]);
         if (board[validCoordinates[0]] [validCoordinates[1]] == '_')
             board[validCoordinates[0]] [validCoordinates[1]] = player;
-        //System.out.println(board[validCoordinates[0]] [validCoordinates[1]]);
-        //boolean fEmpty = fieldEmpty(validCoordinates, board);
-        //System.out.println(fEmpty);
-        //System.out.println(Arrays.equals());
         StatusDisplay(board);
     }
-
-    /*
-    public static void Session(char player, char[][] board) {
-        int[] validCoordinates = getCoordinates(getChar());
-
-        while (validCoordinates[0] == 0) {
-            validCoordinates = getCoordinates(getChar());
-        }
-        System.out.println("vc1: " + validCoordinates[0] + " vc2: " + validCoordinates[1]);
-    }
-*/
-
-/*
-    public static void Session(char player, char[][] board) {
-        //System.out.print("Enter the coordinates: ");
-        int[] validCoordinates = getCoordinates(getChar());
-        System.out.println("S1: " + validCoordinates[0] + " " + validCoordinates[1]);
-        validCoordinates = getCoordinates(getChar());
-        System.out.println("s2: " + validCoordinates[0] + " " + validCoordinates[1]);
-    }
-
-    /*
-    public static void Session(char player, char[][] board) {
-
-        int[] validCoordinates = getCoordinates(getChar());
-        if (validCoordinates[0] != 0) {
-            System.out.println("Looks like valid coordinates");
-        } else {
-            validCoordinates = getCoordinates(getChar());
-        }
-
-        System.out.println(validCoordinates[0] + " " + validCoordinates[1]);
-    }
-*/
 
     public static void StateChecks(char[][] board) {
         boolean testResult;
@@ -449,7 +356,6 @@ public class Main {
             StatusDisplay(board);
             //StateChecks(board);
             Session('X',board);
-
         }
     }
 }
