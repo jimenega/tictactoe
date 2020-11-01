@@ -234,7 +234,7 @@ public class Main {
         System.out.println("count:  " + count);
         System.out.println("icount: " + icount);
         System.out.println("ccount: " + ccount);
-        System.out.println("c1: " + c1 + " c2: " + c2);
+        //System.out.println("c1: " + c1 + " c2: " + c2);
         if (ccount > 0) {
             System.out.println("You should enter numbers!");
         } else if (c1 > 3 || c2 > 3) {
@@ -248,7 +248,7 @@ public class Main {
             int[][] RealArray = new int[][]{{2, 0}, {1, 0}, {0, 0}, {2, 1}, {1, 1}, {0, 1}, {2, 2}, {1, 2}, {0, 2}};
             //int [] testEmpty = new int[] {0};
             //System.out.println(Arrays.equals(vCoordinates, ));
-            System.out.println(Arrays.deepToString(board));
+            //System.out.println(Arrays.deepToString(board));
             System.out.println(Arrays.toString(validCoordinates));
             int indexToReal = 0;
             for (int[] Selected : selectArray) {
@@ -258,11 +258,11 @@ public class Main {
                 if (equals) break;
                 indexToReal++;
             }
-            System.out.println("indexToReal:" + indexToReal);
+            //System.out.println("indexToReal:" + indexToReal);
             System.out.println(Arrays.toString(RealArray[indexToReal]));
             int vC1 = RealArray[indexToReal][0];
             int vC2 = RealArray[indexToReal][1];
-            System.out.println(vC1 + " " + vC2);
+            //System.out.println(vC1 + " " + vC2);
             System.out.println(board[vC1][vC2]);
             //fldEmpty = board[vC1][vC2] == '_';
             if (board[vC1][vC2] == '_') {
@@ -322,18 +322,14 @@ public class Main {
         do {
             validCoordinates = getCoordinates(getChar(), board);
         } while (validCoordinates[0] == -1);
-        System.out.println("rVc1: " + validCoordinates[0] + " rVc2: " + validCoordinates[1]);
+        //System.out.println("rVc1: " + validCoordinates[0] + " rVc2: " + validCoordinates[1]);
         if (board[validCoordinates[0]] [validCoordinates[1]] == '_')
             board[validCoordinates[0]] [validCoordinates[1]] = player;
-
-        System.out.println(board[validCoordinates[0]] [validCoordinates[1]]);
-
-        System.out.println(board[validCoordinates[0]] [validCoordinates[1]]);
+        //System.out.println(board[validCoordinates[0]] [validCoordinates[1]]);
         //boolean fEmpty = fieldEmpty(validCoordinates, board);
         //System.out.println(fEmpty);
         //System.out.println(Arrays.equals());
         StatusDisplay(board);
-
     }
 
     /*
