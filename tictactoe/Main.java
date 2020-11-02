@@ -343,28 +343,26 @@ public class Main {
     	System.out.println("---------");
     }
 
+    static boolean swap = true;
+    public static char swapPlayer() {
+        //static boolean swap;
+        swap = !swap;
+        char player = swap?'X':'O';
+        return player;
+    }
+
     public static void main(String[] args) {
         //int userSymbolInputCount;
         char[][] board = new char[][] {{'_','_','_'},{'_','_','_'},{'_','_','_'}};
         //userSymbolInputCount =  UserInput(board);
         boolean gameNotOver = true; // Start game
         char player = 'X'; // Initial player
-        boolean P = true;
         StatusDisplay(board);
         do {
             Session(player,board);
             StatusDisplay(board);
             //StateChecks(board);
-            P = !P;                 // Swap player
-            player = P?'X':'O';     // Swap player
+            player = swapPlayer();
         } while (gameNotOver);
-
-        /*
-        if (userSymbolInputCount >= 9 ) {
-            StatusDisplay(board);
-            Session(player,board);
-            //StateChecks(board); Do not delete
-        }
-        */
     }
 }
