@@ -4,6 +4,21 @@ import  java.util.Scanner;
 
 public class Main {
 
+    static boolean gameNotOver = true;
+    static boolean swap = true;
+    static String finalResult = null;
+
+    public static char[][] deepCopyMatrix(char[][] input) {
+        if (input == null) {
+            return null;
+        }
+        char[][] result = new char[input.length][];
+        for (int r = 0; r < input.length; r++) {
+            result[r] = input[r].clone();
+        }
+        return result;
+    }
+    
     public static boolean CheckEmptyCells(int[] boardCount) {
         boolean emptyCells = true;
         if (boardCount[2] == 0) {
@@ -57,7 +72,9 @@ public class Main {
         int diff = boardCount[0] - boardCount[1];
         if (diff >= 2 || diff <= -2)  {
             checkResult = true;
-            System.out.print("Impossible");
+            gameNotOver = false;
+            //System.out.print("Impossible");
+            finalResult = "Impossible";
         }
         return checkResult;
     }
@@ -67,7 +84,9 @@ public class Main {
 
         if (winCount[0] >= 1 && winCount[1] >= 1) {
             checkResult = true;
-            System.out.println("Impossible");
+            gameNotOver = false;
+            //System.out.println("Impossible");
+            finalResult = "Impossible";
         }
         return checkResult;
     }
@@ -77,7 +96,9 @@ public class Main {
 
         if (winCount[0] == 0 && winCount[1] == 1) {
             checkResult = true;
-            System.out.println("O wins");
+            gameNotOver = false;
+            //System.out.println("O wins");
+            finalResult = "O wins";
         }
         return checkResult;
     }
@@ -87,7 +108,9 @@ public class Main {
 
         if (winCount[0] == 1 && winCount[1] == 0) {
             checkResult = true;
-            System.out.println("X wins");
+            gameNotOver = false;
+            //System.out.println("X wins");
+            finalResult = "X wins";
         }
         return checkResult;
     }
@@ -98,7 +121,9 @@ public class Main {
         boolean emptyCells = CheckEmptyCells(boardCount);
         if (winCount[0] == 0 && winCount[1] == 0 && !emptyCells) {
             checkResult = true;
-            System.out.println("Draw");
+            gameNotOver = false;
+            //System.out.println("Draw");
+            finalResult ="Draw";
         }
         return checkResult;
     }
@@ -109,7 +134,7 @@ public class Main {
         boolean emptyCells = CheckEmptyCells(boardCount);
         if (winCount[0] == 0 && winCount[1] == 0 && emptyCells && !(diff >= 2 || diff <= -2)) {
             checkResult = true;
-            System.out.println("Game not finished");
+            //System.out.println("Game not finished");
         }
         return checkResult;
     }
@@ -154,7 +179,9 @@ public class Main {
         return winCountArray;
     }
 
-    public static String matrixTranspose(char[][] inArray) {
+    public static String matrixTranspose(char[][] board) {
+        // copy board
+        char [][] inArray = deepCopyMatrix(board);
         // Transpose inArray
         for (int i = 0; i < 3; i++) {
             for (int j = i + 1; j < 3; j++) {
@@ -270,19 +297,23 @@ public class Main {
         if (board[validCoordinates[0]] [validCoordinates[1]] == '_')
             board[validCoordinates[0]] [validCoordinates[1]] = player;
         //StatusDisplay(board);
+        //StateChecks(board);
     }
 
     public static void StateChecks(char[][] board) {
         boolean testResult;
-
         // Convert Array board back to a String
         StringBuilder strAgain = ArrayToStr(board);
 
         // boardCount - Get the count of each slot for X, O, _
         int[] boardCount = BoardCount(strAgain.toString());
 
+       //StatusDisplay(board); //debug
+
         // winChecks - check for X or O winner
         int[] winCountArray = winChecks(strAgain.toString(), board);
+
+        //StatusDisplay(board); //debug
 
         // Go to StateChecks for each desired test on the Board
         for( int i = 1; i <= 6; i++) {
@@ -292,41 +323,6 @@ public class Main {
                 break;
             }
         }
-    }
-
-    public static char CheckSymbol(String str, int symbolCount) {
-        char symbol = str.charAt(symbolCount);
-        
-        switch (symbol) {
-            case 'X':
-            case 'O':
-            case '_':
-                break;
-            default:
-                symbol = ' ';
-                break;
-        }
-    return symbol;
-    }
-
-    public static int UserInput(char[][] board) {
-        int userInputCount= 0;
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter cells: ");
-        String str = scanner.next();
-        if(str.length() < 9) {
-            System.out.println("Symbol count must be 9");
-        } else {
-            userInputCount = str.length();
-            int symbolCount = 0;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    board[i][j] = CheckSymbol(str, symbolCount);
-                    ++symbolCount;
-                }
-            }
-        }
-    return userInputCount;
     }
 
     public static void StatusDisplay(char[][] board) {
@@ -343,26 +339,22 @@ public class Main {
     	System.out.println("---------");
     }
 
-    static boolean swap = true;
     public static char swapPlayer() {
         //static boolean swap;
         swap = !swap;
-        char player = swap?'X':'O';
-        return player;
+        return swap?'X':'O';
     }
-
     public static void main(String[] args) {
         //int userSymbolInputCount;
         char[][] board = new char[][] {{'_','_','_'},{'_','_','_'},{'_','_','_'}};
-        //userSymbolInputCount =  UserInput(board);
-        boolean gameNotOver = true; // Start game
         char player = 'X'; // Initial player
         StatusDisplay(board);
         do {
             Session(player,board);
             StatusDisplay(board);
-            //StateChecks(board);
+            StateChecks(board);
             player = swapPlayer();
         } while (gameNotOver);
+        System.out.println(finalResult);
     }
 }
