@@ -81,7 +81,6 @@ public class Main {
 
     public static boolean Check5(int[] winCount) {
         boolean checkResult = false;
-
         if (winCount[0] >= 1 && winCount[1] >= 1) {
             checkResult = true;
             gameNotOver = false;
@@ -93,8 +92,7 @@ public class Main {
 
     public static boolean Check4(int[] winCount) {
         boolean checkResult = false;
-
-        if (winCount[0] == 0 && winCount[1] == 1) {
+        if (winCount[0] == 0 && (winCount[1] == 1 || winCount[1] == 2)) {
             checkResult = true;
             gameNotOver = false;
             //System.out.println("O wins");
@@ -105,8 +103,7 @@ public class Main {
 
     public static boolean Check3(int[] winCount) {
         boolean checkResult = false;
-
-        if (winCount[0] == 1 && winCount[1] == 0) {
+        if ((winCount[0] == 1 || winCount[0] == 2) && winCount[1] == 0) {
             checkResult = true;
             gameNotOver = false;
             //System.out.println("X wins");
@@ -117,7 +114,6 @@ public class Main {
 
     public static boolean Check2(int[] boardCount, int[] winCount) {
         boolean checkResult = false;
-
         boolean emptyCells = CheckEmptyCells(boardCount);
         if (winCount[0] == 0 && winCount[1] == 0 && !emptyCells) {
             checkResult = true;
@@ -296,8 +292,6 @@ public class Main {
         } while (validCoordinates[0] == -1);
         if (board[validCoordinates[0]] [validCoordinates[1]] == '_')
             board[validCoordinates[0]] [validCoordinates[1]] = player;
-        //StatusDisplay(board);
-        //StateChecks(board);
     }
 
     public static void StateChecks(char[][] board) {
