@@ -302,12 +302,8 @@ public class Main {
         // boardCount - Get the count of each slot for X, O, _
         int[] boardCount = BoardCount(strAgain.toString());
 
-       //StatusDisplay(board); //debug
-
         // winChecks - check for X or O winner
         int[] winCountArray = winChecks(strAgain.toString(), board);
-
-        //StatusDisplay(board); //debug
 
         // Go to StateChecks for each desired test on the Board
         for( int i = 1; i <= 6; i++) {
@@ -339,7 +335,7 @@ public class Main {
         return swap?'X':'O';
     }
     public static void main(String[] args) {
-        //int userSymbolInputCount;
+
         char[][] board = new char[][] {{'_','_','_'},{'_','_','_'},{'_','_','_'}};
         char player = 'X'; // Initial player
         StatusDisplay(board);
